@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-primary text-navy-900 font-semibold rounded-lg
+           hover:bg-primary-400 transition-all duration-200 shadow-lg hover:shadow-xl
+           hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg
+           hover:bg-primary hover:text-navy-900 transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  .btn-outline-light {
+    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-white/30 text-white font-semibold rounded-lg
+           hover:bg-white/10 transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-navy-900;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-lg p-6 md:p-8;
+  }
+
+  .card-dark {
+    @apply bg-navy-800 rounded-2xl p-6 md:p-8 border border-navy-700;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-white border border-gray-300 rounded-lg
+           focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
+           placeholder:text-gray-400 text-navy-900;
+  }
+
+  .input-field-dark {
+    @apply w-full px-4 py-3 bg-navy-800 border border-navy-700 rounded-lg text-white
+           focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
+           placeholder:text-gray-500;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-navy-900 mb-2;
+  }
+
+  .label-dark {
+    @apply block text-sm font-medium text-gray-200 mb-2;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
