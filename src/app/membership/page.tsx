@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import {
@@ -22,7 +22,8 @@ type CodeValidationResult = {
   message?: string
 }
 
-export default function MembershipPage() {
+// Inner component that uses useSearchParams - must be wrapped in Suspense
+function MembershipContent() {
   const searchParams = useSearchParams()
   const [invitationCode, setInvitationCode] = useState('')
   const [codeValidation, setCodeValidation] = useState<CodeValidationResult | null>(
@@ -334,5 +335,18 @@ export default function MembershipPage() {
         </div>
       </section>
     </div>
+  )
+}
+
+// Main page component that wraps MembershipContent in Suspense
+export default function MembershipPage() {
+  return (
+    <Suspense fallback={
+      <div className="bg-navy-900 min-h-screen pt-20 flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-primary animate-spin" />
+      </div>
+    }>
+      <MembershipContent />
+    </Suspense>
   )
 }
