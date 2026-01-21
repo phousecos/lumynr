@@ -51,7 +51,7 @@ export default function Home() {
       icon: UsersRound,
       title: 'Group Coaching',
       description:
-        'Intensive sessions with experienced coaches focused on leadership, career strategy, and breaking through barriers. Small groups, big impact.',
+        'Intensive sessions with experienced coaches focused on leadership, career strategy, and breaking through barriers. Small groups, big impact. Available to members at special pricing.',
       comingSoon: true,
     },
   ]
