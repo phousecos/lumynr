@@ -50,11 +50,11 @@ export default function Footer() {
           <div className="md:col-span-5">
             <Link href="/" className="inline-block mb-5 group">
               <Image
-                src="/images/logo-full.png"
+                src="/images/logo-horizontal.png"
                 alt="Lumynr"
-                width={130}
-                height={38}
-                className="h-9 w-auto transition-transform duration-300 group-hover:scale-105"
+                width={500}
+                height={125}
+                className="h-10 w-auto transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
             <p className="text-gray-400 mb-5 max-w-sm leading-relaxed">
