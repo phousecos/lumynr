@@ -15,6 +15,7 @@ import {
   Newspaper,
   Mic,
   CircleDot,
+  UsersRound,
 } from 'lucide-react'
 
 type CodeValidationResult = {
@@ -140,12 +141,20 @@ function MembershipContent() {
       title: 'Mentoring Circles',
       description:
         'Structured small-group mentorship with senior IT leaders. Get guidance, accountability, and support from women who understand your journey and want to see you succeed.',
+      comingSoon: true,
     },
     {
       icon: Users,
       title: 'Community Access',
       description:
         'Full access to our private forums and discussion groups. Find your accountability partners, get advice on workplace challenges, celebrate wins, and build genuine relationships with women who understand your experience.',
+    },
+    {
+      icon: UsersRound,
+      title: 'Group Coaching',
+      description:
+        'Intensive sessions with experienced coaches focused on leadership, career strategy, and breaking through barriers. Small groups, big impact.',
+      comingSoon: true,
     },
   ]
 
@@ -182,9 +191,16 @@ function MembershipContent() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-navy-900 mb-2">
-                    {benefit.title}
-                  </h3>
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className="text-xl font-bold text-navy-900">
+                      {benefit.title}
+                    </h3>
+                    {'comingSoon' in benefit && benefit.comingSoon && (
+                      <span className="bg-primary/10 text-primary text-xs font-semibold px-2 py-0.5 rounded-full">
+                        Coming Soon
+                      </span>
+                    )}
+                  </div>
                   <p className="text-gray-600 leading-relaxed">
                     {benefit.description}
                   </p>
