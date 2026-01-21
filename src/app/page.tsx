@@ -40,6 +40,13 @@ export default function Home() {
       description:
         "Structured small-group mentorship with senior IT leaders who've walked your path. Not random coffee chats—real guidance, accountability, and support designed to move your career forward.",
     },
+    {
+      icon: UsersRound,
+      title: 'Group Coaching',
+      description:
+        'Intensive sessions with experienced coaches focused on leadership, career strategy, and breaking through barriers. Small groups, big impact.',
+      comingSoon: true,
+    },
   ]
 
   const steps = [
@@ -159,8 +166,13 @@ export default function Home() {
                            shadow-[0_4px_20px_rgba(0,0,0,0.08)]
                            hover:shadow-[0_8px_40px_rgba(0,0,0,0.12)]
                            hover:border-primary-200/50 hover:-translate-y-1
-                           transition-all duration-300"
+                           transition-all duration-300 relative overflow-hidden"
               >
+                {'comingSoon' in feature && feature.comingSoon && (
+                  <div className="absolute top-4 right-4 bg-primary-100 text-primary-700 text-xs font-semibold px-3 py-1 rounded-full">
+                    Coming Soon
+                  </div>
+                )}
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-100 to-primary-50
                                 flex items-center justify-center mb-6
                                 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary-500/20
@@ -173,44 +185,6 @@ export default function Home() {
                 <p className="text-gray-600 leading-relaxed">{feature.description}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Coming Soon Section */}
-      <section className="section-padding bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-        <div className="container-custom relative">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <p className="text-primary-600 font-semibold mb-3 tracking-wide uppercase text-sm">
-              More Ways to Rise
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-navy-900 mb-4">
-              Coming Soon
-            </h2>
-            <p className="text-gray-600 text-lg">
-              Members get exclusive access to premium services designed to accelerate your career.
-            </p>
-          </div>
-
-          <div className="max-w-lg mx-auto">
-            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-[0_4px_20px_rgba(0,0,0,0.06)] relative overflow-hidden">
-              <div className="absolute top-4 right-4 bg-primary-100 text-primary-700 text-xs font-semibold px-3 py-1 rounded-full">
-                Coming Soon
-              </div>
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-100 to-primary-50
-                              flex items-center justify-center mb-6 border border-primary-200/50">
-                <UsersRound className="w-7 h-7 text-primary-500" />
-              </div>
-              <h3 className="text-xl font-bold text-navy-900 mb-3">
-                Group Coaching
-              </h3>
-              <p className="text-gray-600 leading-relaxed mb-4">
-                Intensive sessions with experienced coaches focused on leadership, career strategy, and breaking through barriers. Small groups, big impact.
-              </p>
-              <p className="text-sm text-gray-500">
-                Member pricing available
-              </p>
-            </div>
           </div>
         </div>
       </section>
