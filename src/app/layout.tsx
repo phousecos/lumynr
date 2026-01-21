@@ -14,7 +14,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'Lumynr' }],
   icons: {
     icon: '/favicon.ico',
+    apple: '/favicon.ico',
   },
+  manifest: '/site.webmanifest',
   openGraph: {
     title: 'Lumynr | The Career Community for Black Women in IT',
     description: 'Join the invitation-only community where Black women in IT learn, connect, and rise together.',
