@@ -60,45 +60,42 @@ export default function Home() {
 
         {/* Flame Mark - Large decorative element */}
         <div
-          className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[60vw] h-[180vh] pointer-events-none
-                     opacity-30 md:opacity-40
-                     animate-flame-glow"
-          style={{
-            filter: 'drop-shadow(0 0 80px rgba(245, 158, 11, 0.4)) drop-shadow(0 0 120px rgba(245, 158, 11, 0.2))',
-          }}
+          className="absolute right-[-25%] md:right-[-20%] top-1/2 w-[80vw] md:w-[70vw] h-[200vh] pointer-events-none
+                     opacity-25 md:opacity-35
+                     animate-flame-drift"
         >
           <Image
             src="/images/flame-mark.svg"
             alt=""
             fill
-            className="object-contain object-right"
+            className="object-contain object-right animate-flame-glow"
             priority
           />
         </div>
 
         {/* Content */}
-        <div className="container-custom relative z-10 py-20 md:py-32">
-          <div className="max-w-3xl">
-            <p className="text-primary-400 font-semibold mb-6 tracking-wide uppercase text-sm md:text-base">
+        <div className="container-custom relative z-10 py-24 md:py-32 lg:py-40">
+          <div className="max-w-4xl">
+            <p className="text-primary-400 font-semibold mb-6 tracking-wide uppercase text-sm md:text-base lg:text-lg">
               The Career Community for Black Women in IT
             </p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-8">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.05] mb-10">
               The Sisterhood That Fuels Your{' '}
               <span className="text-primary-400">Next Chapter</span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed max-w-2xl">
+            <p className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed max-w-3xl">
               A private community where Black women in IT learn, connect, and rise
               together. Whether you're relaunching your career, stepping into
               leadership, or finding your people in tech—you belong here.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/membership" className="btn-primary text-base md:text-lg">
+            <div className="flex flex-col sm:flex-row gap-5">
+              <Link href="/membership" className="btn-primary text-lg md:text-xl px-8 py-4">
                 Have Your Invitation? Let's Go
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
               <Link
                 href="/request-invitation"
-                className="btn-outline-light text-base md:text-lg"
+                className="btn-outline-light text-lg md:text-xl px-8 py-4"
               >
                 Request an Invitation
               </Link>
