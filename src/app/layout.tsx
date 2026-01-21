@@ -7,10 +7,14 @@ import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://lumynr.com'),
   title: 'Lumynr | The Career Community for Black Women in IT',
   description: 'Join the invitation-only community where Black women in IT learn, connect, and rise together. Curated learning paths, weekly webinars, book club, and sisterhood.',
   keywords: ['Black women in tech', 'IT career community', 'women in technology', 'career development', 'professional community'],
   authors: [{ name: 'Lumynr' }],
+  icons: {
+    icon: '/favicon.ico',
+  },
   openGraph: {
     title: 'Lumynr | The Career Community for Black Women in IT',
     description: 'Join the invitation-only community where Black women in IT learn, connect, and rise together.',
