@@ -306,50 +306,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Social Proof Section */}
-      <section className="section-padding bg-[#091929] relative overflow-hidden">
+      {/* Invitation Section */}
+      <section className="py-24 md:py-32 bg-[#091929] relative overflow-hidden">
         {/* Background effects */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a1c2e] via-[#091929] to-[#091929]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_40%,rgba(245,158,11,0.08),transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,rgba(245,158,11,0.1),transparent)]" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-navy-700/50 to-transparent" />
         <div className="absolute inset-0 opacity-[0.015] grain pointer-events-none" />
 
+        {/* Flame Mark - decorative */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] pointer-events-none opacity-10">
+          <Image
+            src="/images/flame-mark.svg"
+            alt=""
+            fill
+            className="object-contain"
+          />
+        </div>
+
         <div className="container-custom relative">
           <div className="text-center max-w-3xl mx-auto">
-            <p className="text-primary-400 font-semibold mb-3 tracking-wide uppercase text-sm">
+            <p className="text-primary-400 font-semibold mb-4 tracking-wide uppercase text-sm">
               Join the Movement
             </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              What Our Members Are Saying
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-[0_0_30px_rgba(245,158,11,0.2)]">
+              Your Seat at the Table is Waiting
             </h2>
-            <p className="text-gray-400 text-lg mb-12">
+            <p className="text-xl text-gray-400 leading-relaxed">
               Be one of our founding members and help shape the future of Lumynr.
-            </p>
-
-            {/* Placeholder testimonial cards */}
-            <div className="grid md:grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="bg-gradient-to-b from-navy-800/80 to-navy-800/40 backdrop-blur-sm
-                             rounded-2xl p-8 text-center
-                             border border-navy-700/50
-                             shadow-lg shadow-black/20
-                             hover:border-navy-600/50 hover:shadow-xl hover:shadow-black/30
-                             transition-all duration-300"
-                >
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-navy-700 to-navy-800 mx-auto mb-4
-                                  border border-navy-600/50 shadow-inner" />
-                  <p className="text-gray-400 italic mb-4">
-                    "Testimonial coming soon..."
-                  </p>
-                  <p className="text-gray-500 text-sm">— Founding Member</p>
-                </div>
-              ))}
-            </div>
-
-            <p className="text-primary-400 font-semibold mt-12 text-lg drop-shadow-[0_0_20px_rgba(245,158,11,0.3)]">
-              Your seat at the table is waiting.
             </p>
           </div>
         </div>
