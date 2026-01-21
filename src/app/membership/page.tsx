@@ -161,8 +161,15 @@ function MembershipContent() {
   return (
     <div className="bg-navy-900 min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-b from-navy-900 to-navy-800">
-        <div className="container-custom">
+      <section className="section-padding relative overflow-hidden">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: 'url(/images/membership-hero.png)' }}
+        />
+        {/* Dark Overlay - 50% opacity for text readability while showing image */}
+        <div className="absolute inset-0 bg-navy-900/50" />
+        <div className="container-custom relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Membership Built for Your Journey
