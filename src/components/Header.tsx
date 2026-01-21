@@ -37,11 +37,11 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center group">
             <Image
-              src="/images/logo-full.png"
+              src="/images/logo-horizontal.png"
               alt="Lumynr"
-              width={140}
-              height={40}
-              className="h-9 w-auto transition-transform duration-300 group-hover:scale-105"
+              width={500}
+              height={125}
+              className="h-10 md:h-12 w-auto transition-transform duration-300 group-hover:scale-105"
               priority
             />
           </Link>
