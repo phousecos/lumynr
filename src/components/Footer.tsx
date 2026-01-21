@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Linkedin } from 'lucide-react'
 
-// Bluesky icon as a simple component since it's not in Lucide
+// Bluesky icon component
 function BlueskyIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -40,40 +40,48 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="bg-navy-900 border-t border-navy-800">
-      <div className="container-custom py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
+    <footer className="bg-navy-950 relative">
+      {/* Top gradient line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-navy-700 to-transparent" />
+
+      <div className="container-custom py-16 md:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           {/* Brand Column */}
-          <div className="md:col-span-2">
-            <Link href="/" className="inline-block mb-4">
+          <div className="md:col-span-5">
+            <Link href="/" className="inline-block mb-5 group">
               <Image
                 src="/images/logo-full.png"
                 alt="Lumynr"
-                width={120}
-                height={35}
-                className="h-8 w-auto"
+                width={130}
+                height={38}
+                className="h-9 w-auto transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
-            <p className="text-gray-400 text-sm mb-4 max-w-sm">
-              Where Black Women in IT Rise Together
+            <p className="text-gray-400 mb-5 max-w-sm leading-relaxed">
+              Where Black Women in IT Rise Together. A private community for learning, connection, and growth.
             </p>
             <a
               href="mailto:members@lumynr.com"
-              className="text-primary hover:text-primary-400 transition-colors text-sm"
+              className="inline-flex items-center text-primary-400 hover:text-primary-300 transition-colors text-sm font-medium"
             >
               members@lumynr.com
             </a>
           </div>
 
+          {/* Spacer */}
+          <div className="hidden md:block md:col-span-2" />
+
           {/* Links Column */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Links</h3>
+          <div className="md:col-span-2">
+            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">
+              Quick Links
+            </h3>
             <ul className="space-y-3">
               {footerLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-primary transition-colors text-sm"
+                    className="text-gray-400 hover:text-white transition-colors text-sm"
                   >
                     {link.name}
                   </Link>
@@ -83,16 +91,18 @@ export default function Footer() {
           </div>
 
           {/* Social Column */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Connect</h3>
-            <div className="flex gap-4">
+          <div className="md:col-span-3">
+            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">
+              Connect With Us
+            </h3>
+            <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-primary transition-colors"
+                  className="w-10 h-10 rounded-xl bg-navy-800/50 border border-navy-700/50 flex items-center justify-center text-gray-400 hover:text-primary-400 hover:border-primary-500/30 hover:bg-navy-800 transition-all duration-300"
                   aria-label={social.name}
                 >
                   <social.icon className="h-5 w-5" />
@@ -103,7 +113,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-navy-800">
+        <div className="mt-16 pt-8 border-t border-navy-800/50">
           <p className="text-gray-500 text-sm text-center">
             © {currentYear} Lumynr. All rights reserved.
           </p>
