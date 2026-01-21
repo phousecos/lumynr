@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { GraduationCap, Video, BookOpen, Users, ArrowRight, Newspaper, Mic, CircleDot, UsersRound } from 'lucide-react'
+import { GraduationCap, Video, BookOpen, Users, ArrowRight, Newspaper, Mic, CircleDot, UsersRound, MessageCircle } from 'lucide-react'
 
 export default function Home() {
   const features = [
@@ -39,6 +39,12 @@ export default function Home() {
       title: 'Mentoring Circles',
       description:
         "Structured small-group mentorship with senior IT leaders who've walked your path. Not random coffee chats—real guidance, accountability, and support designed to move your career forward.",
+    },
+    {
+      icon: MessageCircle,
+      title: 'Community Forums',
+      description:
+        "Your space to connect, network, and grow with other members. Share wins, ask questions, find accountability partners, and build genuine relationships with women who understand your journey. No code-switching required.",
     },
     {
       icon: UsersRound,
