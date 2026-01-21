@@ -22,6 +22,7 @@ export default function Footer() {
   const footerLinks = [
     { name: 'About', href: '/about' },
     { name: 'Membership', href: '/membership' },
+    { name: 'Referral Program', href: '/referral-terms' },
     { name: 'Terms of Service', href: '/terms' },
     { name: 'Privacy Policy', href: '/privacy' },
   ]

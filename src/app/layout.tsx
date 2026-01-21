@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   metadataBase: new URL('https://lumynr.com'),
   title: 'Lumynr | The Career Community for Black Women in IT',
-  description: 'Join the invitation-only community where Black women in IT learn, connect, and rise together. Curated learning paths, weekly webinars, book club, and sisterhood.',
+  description: 'Join the invitation-only community where Black women in IT learn, connect, and rise together. Learning paths, webinars, mentoring, and more—30-day free trial.',
   keywords: ['Black women in tech', 'IT career community', 'women in technology', 'career development', 'professional community'],
   authors: [{ name: 'Lumynr' }],
   icons: {
