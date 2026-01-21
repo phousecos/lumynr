@@ -167,7 +167,8 @@ export default function RequestInvitationPage() {
             <p className="text-xl text-gray-300 leading-relaxed">
               Lumynr is an invitation-only community, and every request is reviewed
               personally. This isn't about gatekeeping—it's about building a focused,
-              supportive space where Black women in IT can truly thrive.
+              supportive space where Black women in IT can truly thrive. Tell us a bit
+              about yourself, and we'll be in touch within 48 hours.
             </p>
           </div>
         </div>

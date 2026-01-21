@@ -12,7 +12,9 @@ import {
   AlertCircle,
   Loader2,
   ArrowRight,
-  Gift,
+  Newspaper,
+  Mic,
+  CircleDot,
 } from 'lucide-react'
 
 type CodeValidationResult = {
@@ -122,6 +124,24 @@ function MembershipContent() {
         'Our monthly book club features selections by Black women authors covering leadership, professional development, and personal growth. Participate in discussions, attend author events, and expand your perspective alongside your sisters in tech.',
     },
     {
+      icon: Newspaper,
+      title: 'Amplify Publication',
+      description:
+        'Your monthly dose of insights, trends, and inspiration. Amplify brings you curated content, member spotlights, and resources designed specifically for Black women navigating tech careers.',
+    },
+    {
+      icon: Mic,
+      title: 'Prept Interview Prep',
+      description:
+        'AI-powered interview practice that actually prepares you for the real thing. From technical interviews to salary negotiations, build your confidence before the conversation counts.',
+    },
+    {
+      icon: CircleDot,
+      title: 'Mentoring Circles',
+      description:
+        'Structured small-group mentorship with senior IT leaders. Get guidance, accountability, and support from women who understand your journey and want to see you succeed.',
+    },
+    {
       icon: Users,
       title: 'Community Access',
       description:
@@ -153,7 +173,7 @@ function MembershipContent() {
           <h2 className="text-3xl font-bold text-navy-900 text-center mb-12">
             What's Included
           </h2>
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {benefits.map((benefit) => (
               <div key={benefit.title} className="flex gap-5">
                 <div className="flex-shrink-0">
@@ -185,24 +205,16 @@ function MembershipContent() {
               <div className="text-center mb-8">
                 <div className="flex items-baseline justify-center gap-2">
                   <span className="text-5xl md:text-6xl font-bold text-white">
-                    $9.95
+                    $25
                   </span>
                   <span className="text-gray-400 text-xl">/month</span>
                 </div>
-                <p className="text-gray-400 mt-2">
+                <p className="text-primary-400 font-medium mt-2">
+                  Start with 30 days free, then $25/month
+                </p>
+                <p className="text-gray-400 mt-1 text-sm">
                   Cancel anytime. No long-term commitment required.
                 </p>
-              </div>
-
-              {/* Founding Member Callout */}
-              <div className="bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl p-4 mb-8 border border-primary/30">
-                <div className="flex items-center gap-3">
-                  <Gift className="w-6 h-6 text-primary flex-shrink-0" />
-                  <p className="text-white">
-                    <span className="font-semibold">Founding Member Offer:</span> Your
-                    first 3 months are FREE, then just $9.95/month.
-                  </p>
-                </div>
               </div>
 
               {/* Code Entry */}
@@ -244,13 +256,13 @@ function MembershipContent() {
                         <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
                         <div>
                           <p className="text-green-400 font-medium">
-                            Code accepted!
+                            Code accepted! Start your 30-day free trial.
                           </p>
                           <p className="text-gray-400 text-sm">
                             {codeValidation.type === 'founding'
-                              ? 'Founding Member - 3 months free'
+                              ? 'Founding Member'
                               : codeValidation.type === 'referral'
-                              ? '1 month free (Referral)'
+                              ? 'Referral Invitation'
                               : 'Standard Invitation'}
                           </p>
                         </div>
@@ -317,7 +329,7 @@ function MembershipContent() {
                   </>
                 ) : codeValidation?.valid ? (
                   <>
-                    Complete Your Membership
+                    Start Your Free Trial
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </>
                 ) : (
@@ -327,8 +339,10 @@ function MembershipContent() {
 
               {/* Referral Note */}
               <p className="text-gray-500 text-sm mt-6 text-center">
-                Know someone who should be here? Members earn 1 free month for every
-                friend who joins—up to a full year free.
+                Members earn rewards for referrals.{' '}
+                <Link href="/referral-terms" className="text-primary hover:underline">
+                  Learn more
+                </Link>
               </p>
             </div>
           </div>

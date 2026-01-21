@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { GraduationCap, Video, BookOpen, Users, ArrowRight } from 'lucide-react'
+import { GraduationCap, Video, BookOpen, Users, ArrowRight, Newspaper, Mic, CircleDot, UsersRound } from 'lucide-react'
 
 export default function Home() {
   const features = [
@@ -8,25 +8,37 @@ export default function Home() {
       icon: GraduationCap,
       title: 'Curated Learning Paths',
       description:
-        "Skip the endless scrolling. Our learning paths are designed specifically for where you are in your career—whether you're building technical skills, preparing for leadership, or pivoting into a new specialty.",
+        "Skip the endless scrolling. Our learning paths are designed specifically for where you are in your career—whether you're building technical skills, preparing for certifications, or developing leadership capabilities. Learn with intention.",
     },
     {
       icon: Video,
       title: 'Weekly Live Webinars',
       description:
-        "Every week, connect with industry leaders, subject matter experts, and women who've navigated the paths you're walking. Real talk, real strategies, real community.",
+        "Every week, connect with industry leaders, subject matter experts, and women who've navigated the paths you're walking. Real talk, real strategies, real community—not another boring corporate presentation.",
     },
     {
       icon: BookOpen,
       title: 'Illuminate Book Club',
       description:
-        'Monthly selections celebrating Black women authors on leadership, career growth, and personal development. Read together, discuss together, grow together.',
+        'Monthly selections celebrating Black women authors on leadership, career growth, and personal development. Read together, discuss together, grow together. Because the best insights often come from our own voices.',
     },
     {
-      icon: Users,
-      title: 'Your People, Your Space',
+      icon: Newspaper,
+      title: 'Amplify Monthly',
       description:
-        'Discussion forums, accountability groups, and a community that gets it. No code-switching required. Build relationships with women who understand your journey.',
+        'Our members-only publication featuring career insights, industry trends, member spotlights, and resources curated specifically for Black women in tech. Fresh perspectives delivered to your inbox every month.',
+    },
+    {
+      icon: Mic,
+      title: 'Interview Prep with Prept',
+      description:
+        'AI-powered practice for the conversations that matter most—from technical interviews to salary negotiations. Build confidence and sharpen your skills before the stakes are real.',
+    },
+    {
+      icon: CircleDot,
+      title: 'Mentoring Circles',
+      description:
+        "Structured small-group mentorship with senior IT leaders who've walked your path. Not random coffee chats—real guidance, accountability, and support designed to move your career forward.",
     },
   ]
 
@@ -35,19 +47,19 @@ export default function Home() {
       number: '01',
       title: 'Request Your Invitation',
       description:
-        'Tell us a little about yourself. We review every request personally because this community is built on intention.',
+        'Tell us a little about yourself. We review every request personally because this community is built on intention, not algorithms.',
     },
     {
       number: '02',
       title: 'Get Your Welcome',
       description:
-        "Once approved, you'll receive your personal invitation. Founding members get their first three months free.",
+        "Once approved, you'll receive your personal invitation with everything you need to join.",
     },
     {
       number: '03',
-      title: 'Step Into the Sisterhood',
+      title: 'Start Your Free Trial',
       description:
-        "Complete your membership and dive into learning paths, live webinars, book club, and community.",
+        "Begin your 30-day free trial and dive into learning paths, live webinars, book club, and a community that's been waiting for you.",
     },
   ]
 
@@ -128,10 +140,10 @@ export default function Home() {
         <div className="container-custom relative">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <p className="text-primary-600 font-semibold mb-3 tracking-wide uppercase text-sm">
-              Everything You Need
+              What's Included
             </p>
             <h2 className="text-3xl md:text-4xl font-bold text-navy-900 mb-4">
-              Resources Designed for Your Success
+              Everything You Need to Thrive
             </h2>
             <p className="text-gray-600 text-lg">
               Resources and community designed specifically for Black women navigating
@@ -139,7 +151,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {features.map((feature) => (
               <div
                 key={feature.title}
@@ -161,6 +173,44 @@ export default function Home() {
                 <p className="text-gray-600 leading-relaxed">{feature.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Coming Soon Section */}
+      <section className="section-padding bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+        <div className="container-custom relative">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <p className="text-primary-600 font-semibold mb-3 tracking-wide uppercase text-sm">
+              More Ways to Rise
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-navy-900 mb-4">
+              Coming Soon
+            </h2>
+            <p className="text-gray-600 text-lg">
+              Members get exclusive access to premium services designed to accelerate your career.
+            </p>
+          </div>
+
+          <div className="max-w-lg mx-auto">
+            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-[0_4px_20px_rgba(0,0,0,0.06)] relative overflow-hidden">
+              <div className="absolute top-4 right-4 bg-primary-100 text-primary-700 text-xs font-semibold px-3 py-1 rounded-full">
+                Coming Soon
+              </div>
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-100 to-primary-50
+                              flex items-center justify-center mb-6 border border-primary-200/50">
+                <UsersRound className="w-7 h-7 text-primary-500" />
+              </div>
+              <h3 className="text-xl font-bold text-navy-900 mb-3">
+                Group Coaching
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Intensive sessions with experienced coaches focused on leadership, career strategy, and breaking through barriers. Small groups, big impact.
+              </p>
+              <p className="text-sm text-gray-500">
+                Member pricing available
+              </p>
+            </div>
           </div>
         </div>
       </section>
