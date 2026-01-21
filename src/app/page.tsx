@@ -39,12 +39,13 @@ export default function Home() {
       title: 'Mentoring Circles',
       description:
         "Structured small-group mentorship with senior IT leaders who've walked your path. Not random coffee chats—real guidance, accountability, and support designed to move your career forward.",
+      comingSoon: true,
     },
     {
       icon: MessageCircle,
       title: 'Community Forums',
       description:
-        "Your space to connect, network, and grow with other members. Share wins, ask questions, find accountability partners, and build genuine relationships with women who understand your journey. No code-switching required.",
+        "Your space to connect, network, and grow with other members. Share wins, ask questions, find accountability partners, and build genuine relationships with women who understand your journey.",
     },
     {
       icon: UsersRound,
