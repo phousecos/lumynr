@@ -225,39 +225,47 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="section-padding bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-        {/* Subtle dot pattern */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, #091929 1px, transparent 0)', backgroundSize: '32px 32px'}} />
+      <section className="section-padding bg-[#091929] relative overflow-hidden">
+        {/* Background effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#091929] via-[#0a1c2e] to-[#091929]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_100%,rgba(245,158,11,0.06),transparent)]" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-navy-700/50 to-transparent" />
+        <div className="absolute inset-0 opacity-[0.02] grain pointer-events-none" />
 
         <div className="container-custom relative">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <p className="text-primary-600 font-semibold mb-3 tracking-wide uppercase text-sm">
+            <p className="text-primary-400 font-semibold mb-3 tracking-wide uppercase text-sm">
               Simple Process
             </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-navy-900">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
               Join Us in Three Simple Steps
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-6">
             {steps.map((step, index) => (
-              <div key={step.number} className="relative">
-                {/* Connector line */}
-                {index < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-7 left-[calc(50%+2rem)] w-[calc(100%-4rem)] h-0.5 bg-gradient-to-r from-primary-400 via-primary-300 to-primary-200" />
-                )}
-                <div className="relative text-center md:text-left">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500 to-secondary-500
-                                  flex items-center justify-center mx-auto md:mx-0 mb-6
-                                  text-navy-900 font-bold text-lg
-                                  shadow-lg shadow-primary-500/30
-                                  ring-4 ring-primary-100">
-                    {step.number}
+              <div key={step.number} className="relative group">
+                <div className="bg-gradient-to-b from-navy-800/60 to-navy-800/30 backdrop-blur-sm
+                                rounded-2xl p-8 h-full
+                                border border-navy-700/50
+                                shadow-lg shadow-black/20
+                                hover:border-primary-500/30 hover:shadow-xl hover:shadow-primary-500/10
+                                transition-all duration-300">
+                  {/* Step number */}
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-secondary-500
+                                    flex items-center justify-center
+                                    text-navy-900 font-bold text-lg
+                                    shadow-lg shadow-primary-500/30
+                                    group-hover:scale-110 transition-transform duration-300">
+                      {step.number}
+                    </div>
+                    <div className="h-px flex-1 bg-gradient-to-r from-primary-500/50 to-transparent" />
                   </div>
-                  <h3 className="text-xl font-bold text-navy-900 mb-3">
+                  <h3 className="text-xl font-bold text-white mb-3">
                     {step.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-400 leading-relaxed">
                     {step.description}
                   </p>
                 </div>
