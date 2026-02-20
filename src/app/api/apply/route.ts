@@ -12,10 +12,17 @@ type ApplicationData = {
   linkedinUrl?: string
   alternativeSocialUrl?: string
   identifiesAsBlackWoman: boolean
-  careerStage: string
+  careerLevel: string
+  employmentStatus: string
+  hiresEmployees?: string
+  technologyInterests: string[]
+  sectors: string[]
+  languages: string[]
+  otherLanguage?: string
+  coachingMentoring: string
+  willingToLeadMentoring?: string
+  willingToLeadNovaMentoring?: string
   university?: string
-  heardAbout?: string
-  anythingElse?: string
 }
 
 export async function POST(request: NextRequest) {
@@ -23,7 +30,7 @@ export async function POST(request: NextRequest) {
     const data: ApplicationData = await request.json()
 
     // Validate required fields
-    if (!data.firstName || !data.lastName || !data.email || !data.careerStage) {
+    if (!data.firstName || !data.lastName || !data.email || !data.careerLevel || !data.employmentStatus || !data.coachingMentoring) {
       return NextResponse.json(
         { success: false, message: 'Missing required fields' },
         { status: 400 }
@@ -33,6 +40,14 @@ export async function POST(request: NextRequest) {
     if (!data.identifiesAsBlackWoman) {
       return NextResponse.json(
         { success: false, message: 'Self-identification is required' },
+        { status: 400 }
+      )
+    }
+
+    // Validate at least one profile link
+    if (!data.linkedinUrl && !data.alternativeSocialUrl) {
+      return NextResponse.json(
+        { success: false, message: 'Please provide either a LinkedIn profile or another professional profile link' },
         { status: 400 }
       )
     }
@@ -70,13 +85,50 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Validate checkbox selections
+    if (!data.technologyInterests || data.technologyInterests.length === 0) {
+      return NextResponse.json(
+        { success: false, message: 'Please select at least one technology area of interest' },
+        { status: 400 }
+      )
+    }
+
+    if (!data.sectors || data.sectors.length === 0) {
+      return NextResponse.json(
+        { success: false, message: 'Please select at least one sector' },
+        { status: 400 }
+      )
+    }
+
+    if (!data.languages || data.languages.length === 0) {
+      return NextResponse.json(
+        { success: false, message: 'Please select at least one language' },
+        { status: 400 }
+      )
+    }
+
+    // Build languages string (include other language if specified)
+    const languagesList = [...data.languages]
+    if (languagesList.includes('Other') && data.otherLanguage) {
+      const idx = languagesList.indexOf('Other')
+      languagesList[idx] = `Other: ${data.otherLanguage}`
+    }
+
     // Demo mode - when Airtable is not configured
     if (!AIRTABLE_API_KEY || !AIRTABLE_BASE_ID) {
       console.log('Demo mode: Membership application received', {
         membershipLevel: data.membershipLevel,
         name: `${data.firstName} ${data.lastName}`,
         email: data.email,
-        careerStage: data.careerStage,
+        careerLevel: data.careerLevel,
+        employmentStatus: data.employmentStatus,
+        hiresEmployees: data.hiresEmployees || 'N/A',
+        technologyInterests: data.technologyInterests,
+        sectors: data.sectors,
+        languages: languagesList,
+        coachingMentoring: data.coachingMentoring,
+        willingToLeadMentoring: data.willingToLeadMentoring || 'N/A',
+        willingToLeadNovaMentoring: data.willingToLeadNovaMentoring || 'N/A',
         university: data.university || 'N/A',
       })
 
@@ -106,10 +158,16 @@ export async function POST(request: NextRequest) {
               'LinkedIn URL': data.linkedinUrl || '',
               'Alternative Social URL': data.alternativeSocialUrl || '',
               'Identifies as Black Woman': data.identifiesAsBlackWoman,
-              'Career Stage': data.careerStage,
+              'Career Level': data.careerLevel,
+              'Employment Status': data.employmentStatus,
+              'Hires Employees': data.hiresEmployees || '',
+              'Technology Interests': data.technologyInterests.join(', '),
+              'Sectors': data.sectors.join(', '),
+              'Languages': languagesList.join(', '),
+              'Coaching or Mentoring': data.coachingMentoring,
+              'Willing to Lead Mentoring': data.willingToLeadMentoring || '',
+              'Willing to Lead Nova Mentoring': data.willingToLeadNovaMentoring || '',
               'University': data.university || '',
-              'How Did You Hear': data.heardAbout || '',
-              'Additional Info': data.anythingElse || '',
               'Application Date': new Date().toISOString(),
               'Status': 'Pending Review',
             },

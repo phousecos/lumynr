@@ -21,23 +21,66 @@ type FormData = {
   linkedinUrl: string
   alternativeSocialUrl: string
   identifiesAsBlackWoman: boolean
-  careerStage: string
+  careerLevel: string
+  employmentStatus: string
+  hiresEmployees: string
+  technologyInterests: string[]
+  sectors: string[]
+  languages: string[]
+  otherLanguage: string
+  coachingMentoring: string
+  willingToLeadMentoring: string
+  willingToLeadNovaMentoring: string
   university: string
-  heardAbout: string
-  anythingElse: string
 }
 
-const careerStageOptions = [
-  { value: 'launching', label: 'Launching (early career, entering IT)' },
-  { value: 'relaunching', label: 'Relaunching (returning after a career break)' },
-  {
-    value: 'advancing',
-    label: 'Advancing (growing into leadership or new responsibilities)',
-  },
-  { value: 'pivoting', label: 'Pivoting (transitioning into IT from another field)' },
-  { value: 'exploring', label: 'Exploring (curious about IT careers)' },
-  { value: 'student', label: 'Student (currently pursuing a degree)' },
-  { value: 'other', label: 'Other' },
+const careerLevelOptions = [
+  { value: 'student', label: 'Student' },
+  { value: 'entry_level', label: 'Entry-level / Junior' },
+  { value: 'mid_level', label: 'Mid-level / Experienced' },
+  { value: 'senior_manager', label: 'Senior / Manager' },
+  { value: 'director_executive', label: 'Director / Executive' },
+]
+
+const employmentStatusOptions = [
+  { value: 'employed', label: 'Employed (full or part-time)' },
+  { value: 'self_employed', label: 'Self-employed / Freelancer' },
+  { value: 'laid_off', label: 'Temporarily laid off or on leave' },
+  { value: 'unemployed', label: 'Unemployed and looking for work' },
+  { value: 'retired', label: 'Retired' },
+  { value: 'student_homemaker', label: 'Student / Homemaker' },
+]
+
+const technologyOptions = [
+  'Cloud Computing (AWS, Azure, GCP)',
+  'Cybersecurity',
+  'Data Science & Analytics',
+  'Artificial Intelligence / Machine Learning',
+  'Software Development / Engineering',
+  'DevOps & Infrastructure',
+  'Project / Product Management',
+  'Networking & Systems Administration',
+  'UX / UI Design',
+  'Database Management & Administration',
+]
+
+const sectorOptions = [
+  { value: 'agriculture', label: 'Agriculture' },
+  { value: 'manufacturing', label: 'Manufacturing' },
+  { value: 'healthcare', label: 'Healthcare' },
+  { value: 'financial_services', label: 'Financial Services' },
+  { value: 'information_technology', label: 'Information Technology' },
+  { value: 'education_government', label: 'Education and Government' },
+  { value: 'retail_wholesale', label: 'Retail or Wholesale Trade' },
+]
+
+const languageOptions = [
+  'English',
+  'Arabic',
+  'French',
+  'Spanish',
+  'Portuguese',
+  'Swahili',
 ]
 
 function ApplicationContent() {
@@ -54,17 +97,29 @@ function ApplicationContent() {
     linkedinUrl: '',
     alternativeSocialUrl: '',
     identifiesAsBlackWoman: false,
-    careerStage: initialLevel === 'nova' ? 'student' : '',
+    careerLevel: initialLevel === 'nova' ? 'student' : '',
+    employmentStatus: '',
+    hiresEmployees: '',
+    technologyInterests: [],
+    sectors: [],
+    languages: [],
+    otherLanguage: '',
+    coachingMentoring: '',
+    willingToLeadMentoring: '',
+    willingToLeadNovaMentoring: '',
     university: '',
-    heardAbout: '',
-    anythingElse: '',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [error, setError] = useState('')
   const [emailError, setEmailError] = useState('')
+  const [profileError, setProfileError] = useState('')
 
   const isNova = formData.membershipLevel === 'nova'
+  const isSeniorOrAbove =
+    formData.careerLevel === 'senior_manager' ||
+    formData.careerLevel === 'director_executive'
+  const isDirector = formData.careerLevel === 'director_executive'
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -78,6 +133,11 @@ function ApplicationContent() {
       [name]: newValue,
     }))
 
+    // Clear profile error when either profile field is filled
+    if (name === 'linkedinUrl' || name === 'alternativeSocialUrl') {
+      setProfileError('')
+    }
+
     // Validate .edu email for Nova
     if (name === 'email' && isNova) {
       if (value && !value.toLowerCase().endsWith('.edu')) {
@@ -88,16 +148,30 @@ function ApplicationContent() {
     } else if (name === 'email') {
       setEmailError('')
     }
+
+    // Clear conditional fields when employment status changes
+    if (name === 'employmentStatus' && value !== 'self_employed') {
+      setFormData((prev) => ({ ...prev, [name]: value, hiresEmployees: '' }))
+    }
+  }
+
+  const handleCheckboxArray = (field: 'technologyInterests' | 'sectors' | 'languages', value: string) => {
+    setFormData((prev) => {
+      const current = prev[field]
+      const updated = current.includes(value)
+        ? current.filter((v) => v !== value)
+        : [...current, value]
+      return { ...prev, [field]: updated }
+    })
   }
 
   const handleLevelChange = (level: MembershipLevel) => {
     setFormData((prev) => ({
       ...prev,
       membershipLevel: level,
-      careerStage: level === 'nova' ? 'student' : prev.careerStage === 'student' ? '' : prev.careerStage,
+      careerLevel: level === 'nova' ? 'student' : prev.careerLevel === 'student' ? '' : prev.careerLevel,
     }))
     setEmailError('')
-    // Re-validate email when switching to Nova
     if (level === 'nova' && formData.email && !formData.email.toLowerCase().endsWith('.edu')) {
       setEmailError('Nova membership requires a valid .edu email address.')
     }
@@ -106,10 +180,17 @@ function ApplicationContent() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
+    setProfileError('')
 
     // Validate .edu email for Nova
     if (isNova && !formData.email.toLowerCase().endsWith('.edu')) {
       setEmailError('Nova membership requires a valid .edu email address.')
+      return
+    }
+
+    // Validate that at least one profile link is provided
+    if (!formData.linkedinUrl && !formData.alternativeSocialUrl) {
+      setProfileError('Please provide either a LinkedIn profile or another professional profile link.')
       return
     }
 
@@ -234,7 +315,7 @@ function ApplicationContent() {
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="max-w-2xl mx-auto">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-8">
               {/* Membership Level Toggle */}
               <div>
                 <label className="label">
@@ -256,7 +337,7 @@ function ApplicationContent() {
                         Luminary
                       </span>
                     </div>
-                    <p className="text-sm text-gray-500">$25/month · Base membership</p>
+                    <p className="text-sm text-gray-500">$25/month</p>
                   </button>
                   <button
                     type="button"
@@ -281,7 +362,7 @@ function ApplicationContent() {
                 </div>
               </div>
 
-              {/* Name Fields */}
+              {/* Q1: Full Name */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="firstName" className="label">
@@ -360,10 +441,11 @@ function ApplicationContent() {
                 </div>
               )}
 
-              {/* LinkedIn */}
+              {/* Q2: LinkedIn Profile */}
               <div>
                 <label htmlFor="linkedinUrl" className="label">
-                  LinkedIn Profile (Recommended)
+                  LinkedIn Profile Link{' '}
+                  <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="url"
@@ -372,17 +454,18 @@ function ApplicationContent() {
                   value={formData.linkedinUrl}
                   onChange={handleInputChange}
                   placeholder="https://linkedin.com/in/yourprofile"
-                  className="input-field"
+                  className={`input-field ${profileError && !formData.linkedinUrl && !formData.alternativeSocialUrl ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' : ''}`}
                 />
                 <p className="text-gray-500 text-sm mt-1">
-                  Helps us learn more about your professional background.
+                  Either LinkedIn or another professional profile link is required.
                 </p>
               </div>
 
-              {/* Alternative Social */}
+              {/* Q3: Other Professional Profile Links */}
               <div>
                 <label htmlFor="alternativeSocialUrl" className="label">
-                  Other Professional Profile
+                  Other Professional Profile Links{' '}
+                  <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="url"
@@ -391,12 +474,14 @@ function ApplicationContent() {
                   value={formData.alternativeSocialUrl}
                   onChange={handleInputChange}
                   placeholder="https://..."
-                  className="input-field"
+                  className={`input-field ${profileError && !formData.linkedinUrl && !formData.alternativeSocialUrl ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' : ''}`}
                 />
                 <p className="text-gray-500 text-sm mt-1">
-                  If you don&apos;t use LinkedIn, share another professional profile or
-                  portfolio.
+                  Portfolio, GitHub, personal website, or other professional profile.
                 </p>
+                {profileError && (
+                  <p className="text-red-500 text-sm mt-1">{profileError}</p>
+                )}
               </div>
 
               {/* Self-Identification */}
@@ -417,64 +502,283 @@ function ApplicationContent() {
                 </label>
               </div>
 
-              {/* Career Stage */}
+              {/* Q4: Career Level */}
               <div>
-                <label htmlFor="careerStage" className="label">
-                  Where are you in your career journey?{' '}
+                <label className="label">
+                  How would you describe your career level?{' '}
                   <span className="text-red-500">*</span>
                 </label>
-                <select
-                  id="careerStage"
-                  name="careerStage"
-                  value={formData.careerStage}
-                  onChange={handleInputChange}
-                  required
-                  className="input-field"
-                >
-                  <option value="">Select an option</option>
-                  {careerStageOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
+                <div className="space-y-3">
+                  {careerLevelOptions.map((option) => (
+                    <label
+                      key={option.value}
+                      className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <input
+                        type="radio"
+                        name="careerLevel"
+                        value={option.value}
+                        checked={formData.careerLevel === option.value}
+                        onChange={handleInputChange}
+                        required
+                        className="w-5 h-5 text-primary focus:ring-primary border-gray-300"
+                      />
+                      <span className="text-navy-900">{option.label}</span>
+                    </label>
                   ))}
-                </select>
+                </div>
               </div>
 
-              {/* How Did You Hear */}
+              {/* Q5: Employment Status */}
               <div>
-                <label htmlFor="heardAbout" className="label">
-                  How did you hear about Lumynr?
+                <label className="label">
+                  What is your current employment status?{' '}
+                  <span className="text-red-500">*</span>
                 </label>
-                <input
-                  type="text"
-                  id="heardAbout"
-                  name="heardAbout"
-                  value={formData.heardAbout}
-                  onChange={handleInputChange}
-                  placeholder="A friend, LinkedIn, podcast, etc."
-                  className="input-field"
-                />
+                <div className="space-y-3">
+                  {employmentStatusOptions.map((option) => (
+                    <div key={option.value}>
+                      <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                        <input
+                          type="radio"
+                          name="employmentStatus"
+                          value={option.value}
+                          checked={formData.employmentStatus === option.value}
+                          onChange={handleInputChange}
+                          required
+                          className="w-5 h-5 text-primary focus:ring-primary border-gray-300"
+                        />
+                        <span className="text-navy-900">{option.label}</span>
+                      </label>
+                      {/* Sub-question for self-employed */}
+                      {option.value === 'self_employed' &&
+                        formData.employmentStatus === 'self_employed' && (
+                          <div className="ml-11 mt-3 p-4 bg-gray-50 rounded-lg">
+                            <label className="label text-sm">
+                              Does your business currently hire employees or contract with
+                              professionals?
+                            </label>
+                            <div className="space-y-2 mt-2">
+                              {['Yes', 'No'].map((val) => (
+                                <label
+                                  key={val}
+                                  className="flex items-center gap-3 cursor-pointer"
+                                >
+                                  <input
+                                    type="radio"
+                                    name="hiresEmployees"
+                                    value={val.toLowerCase()}
+                                    checked={formData.hiresEmployees === val.toLowerCase()}
+                                    onChange={handleInputChange}
+                                    className="w-4 h-4 text-primary focus:ring-primary border-gray-300"
+                                  />
+                                  <span className="text-navy-900 text-sm">{val}</span>
+                                </label>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              {/* Anything Else */}
+              {/* Q6: Technology Areas of Interest */}
               <div>
-                <label htmlFor="anythingElse" className="label">
-                  Anything else you&apos;d like us to know?
+                <label className="label">
+                  What are your technology areas of interest?{' '}
+                  <span className="text-red-500">*</span>
                 </label>
-                <textarea
-                  id="anythingElse"
-                  name="anythingElse"
-                  value={formData.anythingElse}
-                  onChange={handleInputChange}
-                  placeholder="Optional - share whatever feels relevant"
-                  rows={4}
-                  className="input-field resize-none"
-                />
-                <p className="text-gray-500 text-sm mt-1">
-                  This is your space to tell us more about yourself or what you&apos;re
-                  hoping to find in Lumynr.
+                <p className="text-gray-500 text-sm mb-3">
+                  Select all that apply.
                 </p>
+                <div className="space-y-3">
+                  {technologyOptions.map((tech) => (
+                    <label
+                      key={tech}
+                      className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={formData.technologyInterests.includes(tech)}
+                        onChange={() => handleCheckboxArray('technologyInterests', tech)}
+                        className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
+                      />
+                      <span className="text-navy-900">{tech}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
+
+              {/* Q7: Sectors */}
+              <div>
+                <label className="label">
+                  Which sectors align with your professional experience and interests?{' '}
+                  <span className="text-red-500">*</span>
+                </label>
+                <p className="text-gray-500 text-sm mb-3">
+                  Select all that apply.
+                </p>
+                <div className="space-y-3">
+                  {sectorOptions.map((sector) => (
+                    <label
+                      key={sector.value}
+                      className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={formData.sectors.includes(sector.value)}
+                        onChange={() => handleCheckboxArray('sectors', sector.value)}
+                        className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
+                      />
+                      <span className="text-navy-900">{sector.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Q8: Languages */}
+              <div>
+                <label className="label">
+                  Which languages do you speak?{' '}
+                  <span className="text-red-500">*</span>
+                </label>
+                <p className="text-gray-500 text-sm mb-3">
+                  Select all that apply.
+                </p>
+                <div className="space-y-3">
+                  {languageOptions.map((lang) => (
+                    <label
+                      key={lang}
+                      className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={formData.languages.includes(lang)}
+                        onChange={() => handleCheckboxArray('languages', lang)}
+                        className="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
+                      />
+                      <span className="text-navy-900">{lang}</span>
+                    </label>
+                  ))}
+                  {/* Other language option */}
+                  <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                    <input
+                      type="checkbox"
+                      checked={formData.languages.includes('Other')}
+                      onChange={() => handleCheckboxArray('languages', 'Other')}
+                      className="mt-0.5 w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
+                    />
+                    <div className="flex-1">
+                      <span className="text-navy-900">Other</span>
+                      {formData.languages.includes('Other') && (
+                        <input
+                          type="text"
+                          name="otherLanguage"
+                          value={formData.otherLanguage}
+                          onChange={handleInputChange}
+                          placeholder="Please specify"
+                          className="input-field mt-2"
+                        />
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Q9: Coaching or Mentoring */}
+              <div>
+                <label className="label">
+                  Are you interested in receiving coaching or mentoring?{' '}
+                  <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-3">
+                  {[
+                    { value: 'coaching', label: 'Coaching' },
+                    { value: 'mentoring', label: 'Mentoring' },
+                    { value: 'both', label: 'Both' },
+                  ].map((option) => (
+                    <label
+                      key={option.value}
+                      className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <input
+                        type="radio"
+                        name="coachingMentoring"
+                        value={option.value}
+                        checked={formData.coachingMentoring === option.value}
+                        onChange={handleInputChange}
+                        required
+                        className="w-5 h-5 text-primary focus:ring-primary border-gray-300"
+                      />
+                      <span className="text-navy-900">{option.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Q10: Willing to lead mentoring circle (Director/Executive only) */}
+              {isDirector && (
+                <div>
+                  <label className="label">
+                    Are you willing to lead a mentoring circle?
+                  </label>
+                  <div className="space-y-3">
+                    {[
+                      { value: 'yes', label: 'Yes' },
+                      { value: 'no', label: 'No' },
+                      { value: 'maybe', label: 'Maybe — tell me more' },
+                    ].map((option) => (
+                      <label
+                        key={option.value}
+                        className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        <input
+                          type="radio"
+                          name="willingToLeadMentoring"
+                          value={option.value}
+                          checked={formData.willingToLeadMentoring === option.value}
+                          onChange={handleInputChange}
+                          className="w-5 h-5 text-primary focus:ring-primary border-gray-300"
+                        />
+                        <span className="text-navy-900">{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Q11: Willing to lead Nova mentoring circle (Senior/Manager or Director/Executive) */}
+              {isSeniorOrAbove && (
+                <div>
+                  <label className="label">
+                    Are you willing to lead a Nova members (university students) mentoring
+                    circle?
+                  </label>
+                  <div className="space-y-3">
+                    {[
+                      { value: 'yes', label: 'Yes' },
+                      { value: 'no', label: 'No' },
+                      { value: 'maybe', label: 'Maybe — tell me more' },
+                    ].map((option) => (
+                      <label
+                        key={option.value}
+                        className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        <input
+                          type="radio"
+                          name="willingToLeadNovaMentoring"
+                          value={option.value}
+                          checked={formData.willingToLeadNovaMentoring === option.value}
+                          onChange={handleInputChange}
+                          className="w-5 h-5 text-primary focus:ring-primary border-gray-300"
+                        />
+                        <span className="text-navy-900">{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Error Message */}
               {error && (
