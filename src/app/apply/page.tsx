@@ -177,8 +177,8 @@ function ApplicationContent() {
                   <li className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                     <span className="text-gray-300">
-                      Once approved, you&apos;ll receive instructions to activate your
-                      membership and start your free trial
+                      Once approved, you&apos;ll receive an invite link to join the
+                      Lumynr community
                     </span>
                   </li>
                 </ul>
@@ -256,7 +256,7 @@ function ApplicationContent() {
                         Luminary
                       </span>
                     </div>
-                    <p className="text-sm text-gray-500">$25/month</p>
+                    <p className="text-sm text-gray-500">For professionals</p>
                   </button>
                   <button
                     type="button"
@@ -276,7 +276,7 @@ function ApplicationContent() {
                         Student
                       </span>
                     </div>
-                    <p className="text-sm text-gray-500">$10/month · .edu required</p>
+                    <p className="text-sm text-gray-500">For students · .edu required</p>
                   </button>
                 </div>
               </div>

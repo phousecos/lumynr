@@ -120,16 +120,6 @@ export default function MembershipPage() {
                 leading—Luminary membership gives you everything you need to thrive.
               </p>
 
-              <div className="mb-6">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-bold text-white">$25</span>
-                  <span className="text-gray-400 text-lg">/month</span>
-                </div>
-                <p className="text-primary-400 font-medium mt-1 text-sm">
-                  Start with 30 days free
-                </p>
-              </div>
-
               <ul className="space-y-3 mb-8 flex-1">
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
                   <span className="text-primary mt-0.5">✓</span>
@@ -150,10 +140,6 @@ export default function MembershipPage() {
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
                   <span className="text-primary mt-0.5">✓</span>
                   Private community forums
-                </li>
-                <li className="flex items-start gap-3 text-gray-300 text-sm">
-                  <span className="text-primary mt-0.5">✓</span>
-                  Cancel anytime—no long-term commitment
                 </li>
               </ul>
 
@@ -185,24 +171,10 @@ export default function MembershipPage() {
                 community behind you while you&apos;re still in school.
               </p>
 
-              <div className="mb-6">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-bold text-white">$10</span>
-                  <span className="text-gray-400 text-lg">/month</span>
-                </div>
-                <p className="text-primary-400 font-medium mt-1 text-sm">
-                  Start with 30 days free · Requires .edu email
-                </p>
-              </div>
-
               <ul className="space-y-3 mb-8 flex-1">
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
                   <span className="text-primary mt-0.5">✓</span>
                   Everything in Luminary
-                </li>
-                <li className="flex items-start gap-3 text-gray-300 text-sm">
-                  <span className="text-primary mt-0.5">✓</span>
-                  Student-friendly pricing
                 </li>
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
                   <span className="text-primary mt-0.5">✓</span>
