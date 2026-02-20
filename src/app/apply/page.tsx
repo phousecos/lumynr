@@ -170,6 +170,10 @@ function ApplicationContent() {
       ...prev,
       membershipLevel: level,
       careerLevel: level === 'nova' ? 'student' : prev.careerLevel === 'student' ? '' : prev.careerLevel,
+      employmentStatus: level === 'nova' ? '' : prev.employmentStatus,
+      hiresEmployees: level === 'nova' ? '' : prev.hiresEmployees,
+      willingToLeadMentoring: level === 'nova' ? '' : prev.willingToLeadMentoring,
+      willingToLeadNovaMentoring: level === 'nova' ? '' : prev.willingToLeadNovaMentoring,
     }))
     setEmailError('')
     if (level === 'nova' && formData.email && !formData.email.toLowerCase().endsWith('.edu')) {
@@ -502,86 +506,90 @@ function ApplicationContent() {
                 </label>
               </div>
 
-              {/* Q4: Career Level */}
-              <div>
-                <label className="label">
-                  How would you describe your career level?{' '}
-                  <span className="text-red-500">*</span>
-                </label>
-                <div className="space-y-3">
-                  {careerLevelOptions.map((option) => (
-                    <label
-                      key={option.value}
-                      className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors"
-                    >
-                      <input
-                        type="radio"
-                        name="careerLevel"
-                        value={option.value}
-                        checked={formData.careerLevel === option.value}
-                        onChange={handleInputChange}
-                        required
-                        className="w-5 h-5 text-primary focus:ring-primary border-gray-300"
-                      />
-                      <span className="text-navy-900">{option.label}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Q5: Employment Status */}
-              <div>
-                <label className="label">
-                  What is your current employment status?{' '}
-                  <span className="text-red-500">*</span>
-                </label>
-                <div className="space-y-3">
-                  {employmentStatusOptions.map((option) => (
-                    <div key={option.value}>
-                      <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors">
+              {/* Q4: Career Level (Luminary only) */}
+              {!isNova && (
+                <div>
+                  <label className="label">
+                    How would you describe your career level?{' '}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <div className="space-y-3">
+                    {careerLevelOptions.map((option) => (
+                      <label
+                        key={option.value}
+                        className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
                         <input
                           type="radio"
-                          name="employmentStatus"
+                          name="careerLevel"
                           value={option.value}
-                          checked={formData.employmentStatus === option.value}
+                          checked={formData.careerLevel === option.value}
                           onChange={handleInputChange}
                           required
                           className="w-5 h-5 text-primary focus:ring-primary border-gray-300"
                         />
                         <span className="text-navy-900">{option.label}</span>
                       </label>
-                      {/* Sub-question for self-employed */}
-                      {option.value === 'self_employed' &&
-                        formData.employmentStatus === 'self_employed' && (
-                          <div className="ml-11 mt-3 p-4 bg-gray-50 rounded-lg">
-                            <label className="label text-sm">
-                              Does your business currently hire employees or contract with
-                              professionals?
-                            </label>
-                            <div className="space-y-2 mt-2">
-                              {['Yes', 'No'].map((val) => (
-                                <label
-                                  key={val}
-                                  className="flex items-center gap-3 cursor-pointer"
-                                >
-                                  <input
-                                    type="radio"
-                                    name="hiresEmployees"
-                                    value={val.toLowerCase()}
-                                    checked={formData.hiresEmployees === val.toLowerCase()}
-                                    onChange={handleInputChange}
-                                    className="w-4 h-4 text-primary focus:ring-primary border-gray-300"
-                                  />
-                                  <span className="text-navy-900 text-sm">{val}</span>
-                                </label>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {/* Q5: Employment Status (Luminary only) */}
+              {!isNova && (
+                <div>
+                  <label className="label">
+                    What is your current employment status?{' '}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <div className="space-y-3">
+                    {employmentStatusOptions.map((option) => (
+                      <div key={option.value}>
+                        <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                          <input
+                            type="radio"
+                            name="employmentStatus"
+                            value={option.value}
+                            checked={formData.employmentStatus === option.value}
+                            onChange={handleInputChange}
+                            required
+                            className="w-5 h-5 text-primary focus:ring-primary border-gray-300"
+                          />
+                          <span className="text-navy-900">{option.label}</span>
+                        </label>
+                        {/* Sub-question for self-employed */}
+                        {option.value === 'self_employed' &&
+                          formData.employmentStatus === 'self_employed' && (
+                            <div className="ml-11 mt-3 p-4 bg-gray-50 rounded-lg">
+                              <label className="label text-sm">
+                                Does your business currently hire employees or contract with
+                                professionals?
+                              </label>
+                              <div className="space-y-2 mt-2">
+                                {['Yes', 'No'].map((val) => (
+                                  <label
+                                    key={val}
+                                    className="flex items-center gap-3 cursor-pointer"
+                                  >
+                                    <input
+                                      type="radio"
+                                      name="hiresEmployees"
+                                      value={val.toLowerCase()}
+                                      checked={formData.hiresEmployees === val.toLowerCase()}
+                                      onChange={handleInputChange}
+                                      className="w-4 h-4 text-primary focus:ring-primary border-gray-300"
+                                    />
+                                    <span className="text-navy-900 text-sm">{val}</span>
+                                  </label>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Q6: Technology Areas of Interest */}
               <div>
