@@ -12,6 +12,13 @@ type FormData = {
   alternativeSocialUrl: string
   identifiesAsBlackWoman: boolean
   careerStage: string
+  itArea: string
+  itAreaOther: string
+  careerGoal: string
+  communityValue: string[]
+  communityValueOther: string
+  willingToContribute: string
+  referralCode: string
   heardAbout: string
   anythingElse: string
 }
@@ -24,6 +31,13 @@ const initialFormData: FormData = {
   alternativeSocialUrl: '',
   identifiesAsBlackWoman: false,
   careerStage: '',
+  itArea: '',
+  itAreaOther: '',
+  careerGoal: '',
+  communityValue: [],
+  communityValueOther: '',
+  willingToContribute: '',
+  referralCode: '',
   heardAbout: '',
   anythingElse: '',
 }
@@ -38,6 +52,32 @@ const careerStageOptions = [
   { value: 'pivoting', label: 'Pivoting (transitioning into IT from another field)' },
   { value: 'exploring', label: 'Exploring (curious about IT careers)' },
   { value: 'other', label: 'Other' },
+]
+
+const itAreaOptions = [
+  { value: 'software-engineering', label: 'Software Engineering / Development' },
+  { value: 'data-analytics', label: 'Data / Analytics' },
+  { value: 'cybersecurity', label: 'Cybersecurity' },
+  { value: 'cloud-infrastructure', label: 'Cloud / Infrastructure / DevOps' },
+  { value: 'product-project-management', label: 'Product / Project Management' },
+  { value: 'it-support', label: 'IT Support / Help Desk' },
+  { value: 'ux-design', label: 'UX / Design' },
+  { value: 'other', label: 'Other (please specify)' },
+]
+
+const communityValueOptions = [
+  { value: 'mentorship', label: 'Mentorship from women further along in tech' },
+  { value: 'networking', label: 'Networking with peers at a similar career stage' },
+  { value: 'career-resources', label: 'Career resources (resume help, interview prep, negotiation tips)' },
+  { value: 'accountability', label: 'Accountability + motivation to keep going' },
+  { value: 'safe-space', label: 'A safe space to share experiences' },
+  { value: 'other', label: 'Other (please specify)' },
+]
+
+const contributeOptions = [
+  { value: 'yes', label: 'Yes, absolutely!' },
+  { value: 'maybe-later', label: "Maybe later—I'd like to settle in first" },
+  { value: 'not-right-now', label: "Not right now, but I'm open to it down the line" },
 ]
 
 export default function RequestInvitationPage() {
@@ -55,6 +95,16 @@ export default function RequestInvitationPage() {
       [name]:
         type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
     }))
+  }
+
+  const handleCheckboxArrayChange = (field: keyof FormData, value: string) => {
+    setFormData((prev) => {
+      const current = prev[field] as string[]
+      const updated = current.includes(value)
+        ? current.filter((v) => v !== value)
+        : [...current, value]
+      return { ...prev, [field]: updated }
+    })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -311,6 +361,130 @@ export default function RequestInvitationPage() {
                     </option>
                   ))}
                 </select>
+              </div>
+
+              {/* IT Area */}
+              <div>
+                <label htmlFor="itArea" className="label">
+                  What area of IT are you currently in (or exploring)?{' '}
+                  <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="itArea"
+                  name="itArea"
+                  value={formData.itArea}
+                  onChange={handleInputChange}
+                  required
+                  className="input-field"
+                >
+                  <option value="">Select an option</option>
+                  {itAreaOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                {formData.itArea === 'other' && (
+                  <input
+                    type="text"
+                    name="itAreaOther"
+                    value={formData.itAreaOther}
+                    onChange={handleInputChange}
+                    placeholder="Please specify your area of IT"
+                    required
+                    className="input-field mt-3"
+                  />
+                )}
+              </div>
+
+              {/* Career Goal */}
+              <div>
+                <label htmlFor="careerGoal" className="label">
+                  What's one goal you're currently working toward in your career?{' '}
+                  <span className="text-red-500">*</span>
+                </label>
+                <textarea
+                  id="careerGoal"
+                  name="careerGoal"
+                  value={formData.careerGoal}
+                  onChange={handleInputChange}
+                  placeholder="Share a career goal you're focused on right now"
+                  required
+                  rows={3}
+                  className="input-field resize-none"
+                />
+              </div>
+
+              {/* Community Value */}
+              <div>
+                <label className="label">
+                  What would make this community most valuable to you?{' '}
+                  <span className="text-gray-500 font-normal">(Select all that apply)</span>
+                </label>
+                <div className="space-y-3 mt-2">
+                  {communityValueOptions.map((option) => (
+                    <label key={option.value} className="flex items-start gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={formData.communityValue.includes(option.value)}
+                        onChange={() => handleCheckboxArrayChange('communityValue', option.value)}
+                        className="mt-1 w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary"
+                      />
+                      <span className="text-navy-900">{option.label}</span>
+                    </label>
+                  ))}
+                  {formData.communityValue.includes('other') && (
+                    <input
+                      type="text"
+                      name="communityValueOther"
+                      value={formData.communityValueOther}
+                      onChange={handleInputChange}
+                      placeholder="Please specify"
+                      className="input-field ml-8"
+                    />
+                  )}
+                </div>
+              </div>
+
+              {/* Willingness to Contribute */}
+              <div>
+                <label className="label">
+                  Would you be open to contributing to the community (e.g., mentoring,
+                  hosting a session, sharing resources)?{' '}
+                  <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-3 mt-2">
+                  {contributeOptions.map((option) => (
+                    <label key={option.value} className="flex items-center gap-3 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="willingToContribute"
+                        value={option.value}
+                        checked={formData.willingToContribute === option.value}
+                        onChange={handleInputChange}
+                        required
+                        className="w-5 h-5 border-gray-300 text-primary focus:ring-primary"
+                      />
+                      <span className="text-navy-900">{option.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Referral Code */}
+              <div>
+                <label htmlFor="referralCode" className="label">
+                  Referral code (if you were invited by a current member)
+                </label>
+                <input
+                  type="text"
+                  id="referralCode"
+                  name="referralCode"
+                  value={formData.referralCode}
+                  onChange={handleInputChange}
+                  placeholder="Enter referral code"
+                  className="input-field"
+                />
               </div>
 
               {/* How Did You Hear */}
