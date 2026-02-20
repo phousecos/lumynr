@@ -256,7 +256,7 @@ function ApplicationContent() {
                         Luminary
                       </span>
                     </div>
-                    <p className="text-sm text-gray-500">For professionals</p>
+                    <p className="text-sm text-gray-500">$25/month · Base membership</p>
                   </button>
                   <button
                     type="button"
@@ -276,7 +276,7 @@ function ApplicationContent() {
                         Student
                       </span>
                     </div>
-                    <p className="text-sm text-gray-500">For students · .edu required</p>
+                    <p className="text-sm text-gray-500">$15/month · .edu required</p>
                   </button>
                 </div>
               </div>

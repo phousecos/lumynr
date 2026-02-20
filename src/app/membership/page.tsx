@@ -1,74 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import {
-  GraduationCap,
-  Video,
-  BookOpen,
-  Users,
-  ArrowRight,
-  Newspaper,
-  Mic,
-  CircleDot,
-  UsersRound,
-  Sparkles,
-  Star,
-} from 'lucide-react'
+import { ArrowRight, Sparkles, Star } from 'lucide-react'
 
 export default function MembershipPage() {
-  const benefits = [
-    {
-      icon: GraduationCap,
-      title: 'Learning Paths',
-      description:
-        "Structured skill development tracks designed for Black women in IT. Whether you're building technical expertise, preparing for certifications, or developing leadership capabilities, our paths guide you forward with purpose.",
-    },
-    {
-      icon: Video,
-      title: 'Weekly Webinars',
-      description:
-        "Live sessions every week featuring industry experts, career strategists, and women who've been where you're going. Ask questions in real-time, get actionable advice, and connect with speakers who look like you.",
-    },
-    {
-      icon: BookOpen,
-      title: 'Illuminate Book Club',
-      description:
-        'Our monthly book club features selections by Black women authors covering leadership, professional development, and personal growth. Participate in discussions, attend author events, and expand your perspective alongside your sisters in tech.',
-    },
-    {
-      icon: Newspaper,
-      title: 'Amplify Publication',
-      description:
-        'Your monthly dose of insights, trends, and inspiration. Amplify brings you curated content, member spotlights, and resources designed specifically for Black women navigating tech careers.',
-    },
-    {
-      icon: Mic,
-      title: 'Prept Interview Prep',
-      description:
-        'AI-powered interview practice that actually prepares you for the real thing. From technical interviews to salary negotiations, build your confidence before the conversation counts.',
-    },
-    {
-      icon: CircleDot,
-      title: 'Mentoring Circles',
-      description:
-        'Structured small-group mentorship with senior IT leaders. Get guidance, accountability, and support from women who understand your journey and want to see you succeed.',
-      comingSoon: true,
-    },
-    {
-      icon: Users,
-      title: 'Community Access',
-      description:
-        'Full access to our private forums and discussion groups. Find your accountability partners, get advice on workplace challenges, celebrate wins, and build genuine relationships with women who understand your experience.',
-    },
-    {
-      icon: UsersRound,
-      title: 'Group Coaching',
-      description:
-        'Intensive sessions with experienced coaches focused on leadership, career strategy, and breaking through barriers. Small groups, big impact. Available to members at special pricing.',
-      comingSoon: true,
-    },
-  ]
-
   return (
     <div className="bg-navy-900 min-h-screen pt-20">
       {/* Hero Section */}
@@ -101,57 +36,11 @@ export default function MembershipPage() {
             Choose Your Membership
           </h2>
           <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-            Both membership levels include full access to the Lumynr community and
-            resources. Apply today and we&apos;ll review your application personally.
+            Both membership levels include full access to the Lumynr community.
+            Apply today and we&apos;ll review your application personally.
           </p>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Luminary Card */}
-            <div className="bg-navy-900 rounded-3xl p-8 md:p-10 border border-navy-700 flex flex-col">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Star className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="text-2xl font-bold text-white">Luminary</h3>
-              </div>
-              <p className="text-gray-400 mb-6 leading-relaxed">
-                Our core membership for Black women in IT at any stage of their
-                career. Whether you&apos;re launching, advancing, pivoting, or
-                leading—Luminary membership gives you everything you need to thrive.
-              </p>
-
-              <ul className="space-y-3 mb-8 flex-1">
-                <li className="flex items-start gap-3 text-gray-300 text-sm">
-                  <span className="text-primary mt-0.5">✓</span>
-                  Full access to all learning paths and resources
-                </li>
-                <li className="flex items-start gap-3 text-gray-300 text-sm">
-                  <span className="text-primary mt-0.5">✓</span>
-                  Weekly live webinars and recordings
-                </li>
-                <li className="flex items-start gap-3 text-gray-300 text-sm">
-                  <span className="text-primary mt-0.5">✓</span>
-                  Illuminate Book Club and Amplify Publication
-                </li>
-                <li className="flex items-start gap-3 text-gray-300 text-sm">
-                  <span className="text-primary mt-0.5">✓</span>
-                  Prept AI interview prep
-                </li>
-                <li className="flex items-start gap-3 text-gray-300 text-sm">
-                  <span className="text-primary mt-0.5">✓</span>
-                  Private community forums
-                </li>
-              </ul>
-
-              <Link
-                href="/apply?level=luminary"
-                className="btn-primary text-lg py-4 w-full justify-center"
-              >
-                Apply for Luminary
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </div>
-
             {/* Nova Card */}
             <div className="bg-navy-900 rounded-3xl p-8 md:p-10 border border-primary-500/30 flex flex-col relative overflow-hidden">
               {/* Student badge */}
@@ -171,26 +60,55 @@ export default function MembershipPage() {
                 community behind you while you&apos;re still in school.
               </p>
 
+              <div className="mb-6">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-4xl font-bold text-white">$15</span>
+                  <span className="text-gray-400 text-lg">/month</span>
+                </div>
+                <p className="text-primary-400 font-medium mt-1 text-sm">
+                  30-day free trial · ~$149/year with annual billing
+                </p>
+                <p className="text-gray-500 text-xs mt-1">
+                  Requires .edu email · Re-verifies each year
+                </p>
+              </div>
+
               <ul className="space-y-3 mb-8 flex-1">
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
-                  <span className="text-primary mt-0.5">✓</span>
-                  Everything in Luminary
+                  <span className="text-primary mt-0.5">&#10003;</span>
+                  Access to all Community Spaces (discussions, job board, member directory)
                 </li>
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
-                  <span className="text-primary mt-0.5">✓</span>
-                  Early career guidance and mentorship
+                  <span className="text-primary mt-0.5">&#10003;</span>
+                  Live monthly webinars
                 </li>
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
-                  <span className="text-primary mt-0.5">✓</span>
-                  Interview prep for internships and first roles
+                  <span className="text-primary mt-0.5">&#10003;</span>
+                  Virtual book club &mdash; monthly live discussion session
                 </li>
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
-                  <span className="text-primary mt-0.5">✓</span>
-                  Connect with professionals in your target field
+                  <span className="text-primary mt-0.5">&#10003;</span>
+                  Early Career &amp; Students Space &mdash; dedicated forum for navigating the path
                 </li>
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
-                  <span className="text-primary mt-0.5">✓</span>
-                  Valid .edu email address required
+                  <span className="text-primary mt-0.5">&#10003;</span>
+                  Cross-generational mentoring circles &mdash; matched with mid-career and senior professionals
+                </li>
+                <li className="flex items-start gap-3 text-gray-300 text-sm">
+                  <span className="text-primary mt-0.5">&#10003;</span>
+                  Ask a Leader forum &mdash; direct access to Luminary and Constellation members
+                </li>
+                <li className="flex items-start gap-3 text-gray-300 text-sm">
+                  <span className="text-primary mt-0.5">&#10003;</span>
+                  The Transformidable Leader Space &mdash; chapter discussions and framework application
+                </li>
+                <li className="flex items-start gap-3 text-gray-300 text-sm">
+                  <span className="text-primary mt-0.5">&#10003;</span>
+                  Prept &mdash; AI interview prep tool, basic access included at no extra charge
+                </li>
+                <li className="flex items-start gap-3 text-gray-300 text-sm">
+                  <span className="text-primary mt-0.5">&#10003;</span>
+                  Resource library &mdash; foundational career toolkit and podcast archive
                 </li>
               </ul>
 
@@ -202,45 +120,77 @@ export default function MembershipPage() {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Benefits Section */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <h2 className="text-3xl font-bold text-navy-900 text-center mb-4">
-            What&apos;s Included
-          </h2>
-          <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
-            Every membership level includes full access to these resources and
-            community features.
-          </p>
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {benefits.map((benefit) => (
-              <div key={benefit.title} className="flex gap-5">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <benefit.icon className="w-6 h-6 text-primary" />
-                  </div>
-                </div>
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-xl font-bold text-navy-900">
-                      {benefit.title}
-                    </h3>
-                    {'comingSoon' in benefit && benefit.comingSoon && (
-                      <span className="bg-primary/10 text-primary text-xs font-semibold px-2 py-0.5 rounded-full">
-                        Coming Soon
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-gray-600 leading-relaxed">
-                    {benefit.description}
-                  </p>
-                </div>
+            {/* Luminary Card */}
+            <div className="bg-navy-900 rounded-3xl p-8 md:p-10 border border-navy-700 flex flex-col relative overflow-hidden">
+              {/* Founding badge */}
+              <div className="absolute top-6 right-6 bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full border border-primary-500/30">
+                Base Membership
               </div>
-            ))}
+
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Star className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="text-2xl font-bold text-white">Luminary</h3>
+              </div>
+              <p className="text-gray-400 mb-6 leading-relaxed">
+                Our core membership for Black women in IT at any stage of their
+                career. Whether you&apos;re launching, advancing, pivoting, or
+                leading&mdash;Luminary membership gives you everything you need to thrive.
+              </p>
+
+              <div className="mb-6">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-4xl font-bold text-white">$25</span>
+                  <span className="text-gray-400 text-lg">/month</span>
+                </div>
+                <p className="text-primary-400 font-medium mt-1 text-sm">
+                  30-day free trial, then auto-charge
+                </p>
+                <p className="text-gray-500 text-xs mt-1">
+                  Founding Member rate locked permanently (April launch cohort)
+                </p>
+              </div>
+
+              <p className="text-primary-400 font-semibold text-sm mb-3">
+                Everything in Nova, plus:
+              </p>
+              <ul className="space-y-3 mb-8 flex-1">
+                <li className="flex items-start gap-3 text-gray-300 text-sm">
+                  <span className="text-primary mt-0.5">&#10003;</span>
+                  Full webinar replay library &mdash; every session on demand
+                </li>
+                <li className="flex items-start gap-3 text-gray-300 text-sm">
+                  <span className="text-primary mt-0.5">&#10003;</span>
+                  Full Lumynr Courses library &mdash; complete access to all courses
+                </li>
+                <li className="flex items-start gap-3 text-gray-300 text-sm">
+                  <span className="text-primary mt-0.5">&#10003;</span>
+                  Full Resource Library &mdash; career toolkit, industry reports, certification guides, and newsletter archive
+                </li>
+                <li className="flex items-start gap-3 text-gray-300 text-sm">
+                  <span className="text-primary mt-0.5">&#10003;</span>
+                  Member directory with full career stage visibility for networking and mentoring matching
+                </li>
+                <li className="flex items-start gap-3 text-gray-300 text-sm">
+                  <span className="text-primary mt-0.5">&#10003;</span>
+                  Prept &mdash; AI interview prep tool, full access included at no extra charge
+                </li>
+                <li className="flex items-start gap-3 text-gray-300 text-sm">
+                  <span className="text-primary mt-0.5">&#10003;</span>
+                  Founding Member rate locked permanently
+                </li>
+              </ul>
+
+              <Link
+                href="/apply?level=luminary"
+                className="btn-primary text-lg py-4 w-full justify-center"
+              >
+                Apply for Luminary
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -254,7 +204,7 @@ export default function MembershipPage() {
             </h2>
             <p className="text-xl text-gray-400 mb-8 leading-relaxed">
               Apply for membership today. Every application is reviewed
-              personally—because this community is built with intention.
+              personally&mdash;because this community is built with intention.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
