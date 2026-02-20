@@ -11,6 +11,13 @@ type InvitationRequest = {
   alternativeSocialUrl?: string
   identifiesAsBlackWoman: boolean
   careerStage: string
+  itArea: string
+  itAreaOther?: string
+  careerGoal: string
+  communityValue?: string[]
+  communityValueOther?: string
+  willingToContribute: string
+  referralCode?: string
   heardAbout?: string
   anythingElse?: string
 }
@@ -20,7 +27,7 @@ export async function POST(request: NextRequest) {
     const data: InvitationRequest = await request.json()
 
     // Validate required fields
-    if (!data.firstName || !data.lastName || !data.email || !data.careerStage) {
+    if (!data.firstName || !data.lastName || !data.email || !data.careerStage || !data.itArea || !data.careerGoal || !data.willingToContribute) {
       return NextResponse.json(
         { success: false, message: 'Missing required fields' },
         { status: 400 }
@@ -50,6 +57,9 @@ export async function POST(request: NextRequest) {
         name: `${data.firstName} ${data.lastName}`,
         email: data.email,
         careerStage: data.careerStage,
+        itArea: data.itArea,
+        careerGoal: data.careerGoal,
+        willingToContribute: data.willingToContribute,
       })
 
       return NextResponse.json({
@@ -73,6 +83,13 @@ export async function POST(request: NextRequest) {
         alternativeSocialUrl: data.alternativeSocialUrl || null,
         selfIdentification: data.identifiesAsBlackWoman,
         careerStage: data.careerStage,
+        itArea: data.itArea,
+        itAreaOther: data.itAreaOther || null,
+        careerGoal: data.careerGoal,
+        communityValue: data.communityValue || [],
+        communityValueOther: data.communityValueOther || null,
+        willingToContribute: data.willingToContribute,
+        referralCode: data.referralCode || null,
         referralSource: data.heardAbout || null,
         additionalInfo: data.anythingElse || null,
       }),
