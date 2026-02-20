@@ -59,21 +59,21 @@ export default function Home() {
   const steps = [
     {
       number: '01',
-      title: 'Request Your Invitation',
+      title: 'Choose Your Membership',
       description:
-        'Tell us a little about yourself. We review every request personally because this community is built on intention, not algorithms.',
+        'Pick the membership level that fits where you are—Luminary for professionals or Nova for students. Then fill out a quick application.',
     },
     {
       number: '02',
-      title: 'Get Your Welcome',
+      title: 'We Review Personally',
       description:
-        "Once approved, you'll receive your personal invitation with everything you need to join.",
+        "Every application is reviewed by our team within 48 hours. This community is built on intention, not algorithms.",
     },
     {
       number: '03',
       title: 'Start Your Free Trial',
       description:
-        "Begin your 30-day free trial and dive into learning paths, live webinars, book club, and a community that's been waiting for you.",
+        "Once approved, you'll activate your membership and begin your 30-day free trial—learning paths, live webinars, book club, and a community that's been waiting for you.",
     },
   ]
 
@@ -129,14 +129,14 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/membership" className="btn-primary text-base md:text-lg shadow-[0_0_30px_rgba(245,158,11,0.3)]">
-                Have Your Invitation? Let's Go
+                View Membership Options
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
               <Link
-                href="/request-invitation"
+                href="/apply"
                 className="btn-outline-light text-base md:text-lg backdrop-blur-sm"
               >
-                Request an Invitation
+                Apply Now
               </Link>
             </div>
           </div>
@@ -333,7 +333,8 @@ export default function Home() {
               Your Seat at the Table is Waiting
             </h2>
             <p className="text-xl text-gray-400 leading-relaxed">
-              Be one of our founding members and help shape the future of Lumynr.
+              Two membership levels. One powerful community. Apply today and help
+              shape the future of Lumynr.
             </p>
           </div>
         </div>
@@ -360,11 +361,11 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/membership" className="btn-primary text-base shadow-[0_0_40px_rgba(245,158,11,0.25)]">
-                Have Your Invitation? Let's Go
+                View Membership Options
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
-              <Link href="/request-invitation" className="btn-outline-light text-base backdrop-blur-sm">
-                Request an Invitation
+              <Link href="/apply" className="btn-outline-light text-base backdrop-blur-sm">
+                Apply Now
               </Link>
             </div>
           </div>
