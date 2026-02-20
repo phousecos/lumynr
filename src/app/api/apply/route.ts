@@ -30,9 +30,17 @@ export async function POST(request: NextRequest) {
     const data: ApplicationData = await request.json()
 
     // Validate required fields
-    if (!data.firstName || !data.lastName || !data.email || !data.careerLevel || !data.employmentStatus || !data.coachingMentoring) {
+    if (!data.firstName || !data.lastName || !data.email || !data.coachingMentoring) {
       return NextResponse.json(
         { success: false, message: 'Missing required fields' },
+        { status: 400 }
+      )
+    }
+
+    // Career level and employment status are required for Luminary only
+    if (data.membershipLevel !== 'nova' && (!data.careerLevel || !data.employmentStatus)) {
+      return NextResponse.json(
+        { success: false, message: 'Career level and employment status are required' },
         { status: 400 }
       )
     }
