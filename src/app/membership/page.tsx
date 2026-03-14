@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { Sparkles, Clock } from 'lucide-react'
 
 // Founding member deadline — hide the banner after this date
@@ -119,14 +120,12 @@ export default function MembershipPage() {
                 </li>
               </ul>
 
-              <a
-                href="https://community.lumynr.com/join?invitation_token=a00999077ea94592e5a69473164856058946c93f-7d2229cd-30ed-403b-a1fa-4fcdefc49a7e"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/join?plan=stardust"
                 className="btn-secondary text-base py-4 w-full justify-center"
               >
                 Join free
-              </a>
+              </Link>
             </div>
 
             {/* ── Nova Card ── */}
@@ -186,16 +185,12 @@ export default function MembershipPage() {
                 </li>
               </ul>
 
-              <a
-                href={isAnnual
-                  ? 'https://community.lumynr.com/join?invitation_token=b06442ac02fd9ce3ed00421c8c9ffeb5d58fe8d0-1bc90eb4-129b-4e40-a59c-606436e24136'
-                  : 'https://community.lumynr.com/join?invitation_token=aee801314ba90ab314c3449c93de2f424668e50e-3e6abbf5-6e5d-46bb-a9dc-76aca6fa24dc'}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href={`/join?plan=nova&billing=${isAnnual ? 'annual' : 'monthly'}`}
                 className="btn-primary text-base py-4 w-full justify-center"
               >
                 Start free trial
-              </a>
+              </Link>
             </div>
 
             {/* ── Luminary Card (Most Popular) ── */}
@@ -260,16 +255,12 @@ export default function MembershipPage() {
                 </li>
               </ul>
 
-              <a
-                href={isAnnual
-                  ? 'https://community.lumynr.com/join?invitation_token=f49b8d3c89ec444230a207b45317fdbb51ae0832-934eb8f9-c872-4db4-a55f-00913cdfa10f'
-                  : 'https://community.lumynr.com/join?invitation_token=afc9cd91cde9bd6ec8cf5288c0d49238d4d9c30c-4172e50d-9de3-464b-8858-e1bfd2224848'}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href={`/join?plan=luminary&billing=${isAnnual ? 'annual' : 'monthly'}`}
                 className="btn-primary text-base py-4 w-full justify-center"
               >
                 Start free trial
-              </a>
+              </Link>
             </div>
           </div>
 
