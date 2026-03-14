@@ -5,8 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Loader2, CheckCircle2 } from 'lucide-react'
 
-// TODO: Replace with your actual Zapier webhook URL
-const ZAPIER_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/YOUR_HOOK_ID/YOUR_HOOK_PATH/'
+const ZAPIER_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/26824712/uxjo7mj/'
 
 const CIRCLE_INVITE_LINKS: Record<string, string> = {
   stardust:
