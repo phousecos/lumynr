@@ -128,14 +128,9 @@ export default function MembershipPage() {
               </Link>
             </div>
 
-            {/* ── Nova Card (Most Popular) ── */}
-            <div className="bg-navy-900 rounded-3xl p-8 border border-primary-500/40 flex flex-col h-full relative">
-              {/* Most popular badge */}
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary-500 text-navy-900 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg shadow-primary-500/30">
-                Most popular
-              </div>
-
-              <div className="flex items-center gap-2 mb-3 mt-2">
+            {/* ── Nova Card ── */}
+            <div className="bg-navy-900 rounded-3xl p-8 border border-navy-700 flex flex-col h-full">
+              <div className="flex items-center gap-2 mb-3">
                 <Sparkles className="w-5 h-5 text-primary-400" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-2">Nova</h3>
@@ -198,9 +193,14 @@ export default function MembershipPage() {
               </Link>
             </div>
 
-            {/* ── Luminary Card ── */}
-            <div className="bg-navy-900 rounded-3xl p-8 border border-navy-700 flex flex-col h-full">
-              <div className="flex items-center gap-2 mb-3">
+            {/* ── Luminary Card (Most Popular) ── */}
+            <div className="bg-navy-900 rounded-3xl p-8 border border-primary-500/40 flex flex-col h-full relative">
+              {/* Most popular badge */}
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary-500 text-navy-900 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg shadow-primary-500/30">
+                Most popular
+              </div>
+
+              <div className="flex items-center gap-2 mb-3 mt-2">
                 <Sparkles className="w-5 h-5 text-primary-400" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-2">Luminary</h3>
