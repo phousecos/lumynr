@@ -24,42 +24,28 @@ const CIRCLE_INVITE_LINKS: Record<string, string> = {
 const TIER_OPTIONS = ['Stardust', 'Nova', 'Luminary'] as const
 
 const ROLE_OPTIONS = [
-  'Software Engineer',
-  'Data Analyst / Data Scientist',
-  'Product Manager',
-  'UX / UI Designer',
-  'Project Manager',
-  'IT Support / Help Desk',
-  'Systems Administrator',
-  'Network Engineer',
-  'Cloud Engineer',
-  'Cybersecurity Analyst',
-  'DevOps Engineer',
-  'QA / Test Engineer',
-  'Business Analyst',
-  'IT Consultant',
-  'Engineering Manager',
-  'Director / VP',
-  'CTO / CIO',
-  'Student',
-  'Career Changer',
-  'Other',
+  'Business Analysis & Information Systems',
+  'Data & Database Management',
+  'Information Security & Cybersecurity',
+  'Infrastructure & Systems Operations',
+  'IT Project & Product Management',
+  'Software Development & Engineering',
+  'Technical Support & Operations',
+  'Freelancer / Contractor',
+  'Business Owner',
 ]
 
 const SPECIALIZATION_OPTIONS = [
-  'Software Development',
-  'Data & Analytics',
-  'Cloud & Infrastructure',
+  'Artificial Intelligence',
+  'Cloud Computing / Architecture',
   'Cybersecurity',
-  'AI / Machine Learning',
-  'Product Management',
-  'UX / Design',
-  'DevOps / SRE',
-  'Networking',
-  'IT Support & Operations',
-  'Project / Program Management',
-  'Leadership & Management',
-  'Other',
+  'Database Administration / Architecture',
+  'Data Science and Analytics',
+  'DevOps Engineering',
+  'IT Project Management / Leadership',
+  'Network and Systems Administration',
+  'Software Development / Engineering',
+  'Web Development',
 ]
 
 const CAREER_LEVEL_OPTIONS = [
@@ -71,21 +57,56 @@ const CAREER_LEVEL_OPTIONS = [
   'Executive / Leadership (15+ years)',
 ]
 
-const LOCATION_OPTIONS = [
-  'United States',
-  'Canada',
-  'United Kingdom',
-  'Nigeria',
-  'Ghana',
-  'South Africa',
-  'Kenya',
-  'Caribbean',
-  'Europe (Other)',
-  'Africa (Other)',
-  'Asia',
-  'Australia / New Zealand',
-  'Latin America',
-  'Other',
+const LOCATION_GROUPS = [
+  {
+    label: 'United States',
+    options: [
+      'Northeast US',
+      'Southeast US',
+      'Midwest US',
+      'Southwest US',
+      'West US',
+    ],
+  },
+  {
+    label: 'Africa',
+    options: [
+      'West Africa',
+      'East Africa',
+      'Southern Africa',
+      'Central Africa',
+      'North Africa',
+    ],
+  },
+  {
+    label: 'South America',
+    options: [
+      'Brazil',
+      'Caribbean',
+      'Central America',
+      'South America (Other)',
+    ],
+  },
+  {
+    label: 'Europe',
+    options: [
+      'United Kingdom',
+      'Western Europe',
+      'Northern Europe',
+      'Southern Europe',
+      'Eastern Europe',
+    ],
+  },
+  {
+    label: 'Other Regions',
+    options: [
+      'Canada',
+      'Asia',
+      'Australia / New Zealand',
+      'Middle East',
+      'Other',
+    ],
+  },
 ]
 
 const LANGUAGE_OPTIONS = [
@@ -93,13 +114,15 @@ const LANGUAGE_OPTIONS = [
   'French',
   'Spanish',
   'Portuguese',
-  'Yoruba',
-  'Igbo',
-  'Hausa',
   'Swahili',
-  'Twi',
-  'Arabic',
-  'Other',
+  'Hausa',
+  'Yoruba',
+  'Amharic',
+  'Fula',
+  'Igbo',
+  'Zulu',
+  'Oromo',
+  'Xhosa',
 ]
 
 function JoinForm() {
@@ -413,8 +436,12 @@ function JoinForm() {
             className="input-field-dark"
           >
             <option value="">Select your location</option>
-            {LOCATION_OPTIONS.map((l) => (
-              <option key={l} value={l}>{l}</option>
+            {LOCATION_GROUPS.map((group) => (
+              <optgroup key={group.label} label={group.label}>
+                {group.options.map((loc) => (
+                  <option key={loc} value={loc}>{loc}</option>
+                ))}
+              </optgroup>
             ))}
           </select>
         </div>
