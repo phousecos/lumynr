@@ -385,6 +385,14 @@
       luminaryBtn.href = 'https://lumynr.com/checkout?plan=luminary&billing=monthly';
     }
   });
+
+  // Auto-resize: tell parent iframe to match content height
+  function lmPostHeight() {
+    var h = document.body.scrollHeight;
+    window.parent.postMessage({ lumynrHeight: h }, '*');
+  }
+  lmPostHeight();
+  window.addEventListener('resize', lmPostHeight);
 </script>
 </body>
 </html>
