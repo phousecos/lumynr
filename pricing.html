@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumynr Pricing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: transparent; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #CBD5E1;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .lm-pricing {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 16px;
+    }
+
+    /* ── Header ── */
+    .lm-header { text-align: center; margin-bottom: 40px; }
+    .lm-label {
+      color: #FBBF24;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .lm-title {
+      font-size: 40px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+    .lm-subtitle {
+      font-size: 17px;
+      color: #94A3B8;
+      line-height: 1.6;
+    }
+
+    /* ── Founding banner ── */
+    .lm-banner-wrap { display: flex; justify-content: center; }
+    .lm-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      border-radius: 9999px;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      background: rgba(245, 158, 11, 0.1);
+      color: #FBBF24;
+      font-weight: 500;
+      font-size: 14px;
+      margin-top: 28px;
+    }
+    .lm-banner svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* ── Toggle ── */
+    .lm-toggle-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .lm-toggle-label {
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .lm-toggle-label.active { color: #fff; }
+    .lm-toggle-label.inactive { color: #64748B; }
+
+    .lm-toggle {
+      position: relative;
+      width: 48px;
+      height: 28px;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      outline: none;
+    }
+    .lm-toggle.off { background: #475569; }
+    .lm-toggle.on  { background: #F59E0B; }
+    .lm-toggle:focus-visible {
+      box-shadow: 0 0 0 2px #0F172A, 0 0 0 4px #F59E0B;
+    }
+    .lm-toggle-knob {
+      position: absolute;
+      top: 3px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      transition: left 0.2s;
+    }
+    .lm-toggle.off .lm-toggle-knob { left: 3px; }
+    .lm-toggle.on  .lm-toggle-knob { left: 23px; }
+
+    /* ── Cards Grid ── */
+    .lm-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: start;
+      margin-top: 48px;
+    }
+    @media (max-width: 768px) {
+      .lm-cards { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+      .lm-title { font-size: 30px; }
+    }
+
+    /* ── Card ── */
+    .lm-card {
+      background: #0F172A;
+      border-radius: 24px;
+      padding: 32px;
+      border: 1px solid #334155;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+    }
+    .lm-card.featured { border-color: rgba(245, 158, 11, 0.4); }
+
+    .lm-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #F59E0B;
+      color: #0F172A;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+      white-space: nowrap;
+    }
+
+    .lm-card-icon { color: #FBBF24; margin-bottom: 12px; }
+    .lm-card-icon svg { width: 20px; height: 20px; }
+    .lm-card-name { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .lm-card-desc { font-size: 14px; color: #94A3B8; line-height: 1.6; margin-bottom: 24px; }
+
+    .lm-price { margin-bottom: 24px; }
+    .lm-price-amount { font-size: 36px; font-weight: 700; color: #fff; }
+    .lm-price-period { font-size: 18px; color: #94A3B8; margin-left: 6px; }
+    .lm-price-note { color: #FBBF24; font-weight: 500; font-size: 13px; margin-top: 4px; }
+
+    .lm-divider { height: 1px; background: #334155; margin-bottom: 24px; }
+
+    .lm-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 32px;
+      flex: 1;
+    }
+    .lm-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: #CBD5E1;
+      line-height: 1.5;
+    }
+    .lm-check { color: #F59E0B; flex-shrink: 0; margin-top: 2px; font-size: 14px; }
+
+    .lm-soon {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 8px;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 10px;
+      font-weight: 600;
+      background: rgba(168, 85, 247, 0.2);
+      color: #C4B5FD;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      vertical-align: middle;
+    }
+
+    /* ── Buttons ── */
+    .lm-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .lm-btn-secondary {
+      background: transparent;
+      border: 1px solid #475569;
+      color: #fff;
+    }
+    .lm-btn-secondary:hover {
+      border-color: #94A3B8;
+      background: rgba(71, 85, 105, 0.2);
+    }
+    .lm-btn-primary {
+      background: linear-gradient(135deg, #F59E0B, #FBBF24);
+      color: #0F172A;
+    }
+    .lm-btn-primary:hover {
+      background: linear-gradient(135deg, #D97706, #F59E0B);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.35);
+    }
+
+    /* ── Footer ── */
+    .lm-footer { text-align: center; margin-top: 48px; }
+    .lm-footer p { margin-bottom: 8px; }
+    .lm-footer .lm-note { font-size: 14px; color: #94A3B8; }
+    .lm-footer .lm-fine { font-size: 12px; color: #64748B; }
+  </style>
+</head>
+<body>
+<div class="lm-pricing" id="lm-pricing">
+  <!-- Header -->
+  <div class="lm-header">
+    <div class="lm-label">Membership</div>
+    <h2 class="lm-title">Find your place in Lumynr</h2>
+    <p class="lm-subtitle">A private community built exclusively for Black women in technology.</p>
+
+    <!-- Founding banner -->
+    <div class="lm-banner-wrap" id="lm-banner-wrap">
+      <div class="lm-banner">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Founding Member rate locks on June 15, 2026 &mdash; paid plans only
+      </div>
+    </div>
+
+    <!-- Toggle -->
+    <div class="lm-toggle-wrap">
+      <span class="lm-toggle-label active" id="lm-lbl-monthly">Monthly</span>
+      <button class="lm-toggle off" id="lm-toggle" role="switch" aria-checked="false">
+        <span class="lm-toggle-knob"></span>
+      </button>
+      <span class="lm-toggle-label inactive" id="lm-lbl-annual">Annual</span>
+    </div>
+  </div>
+
+  <!-- Cards -->
+  <div class="lm-cards">
+    <!-- Stardust -->
+    <div class="lm-card">
+      <div class="lm-card-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+      </div>
+      <h3 class="lm-card-name">Stardust</h3>
+      <p class="lm-card-desc">Explore the community. No commitment, no card needed.</p>
+      <div class="lm-price">
+        <span class="lm-price-amount">Free</span>
+        <span class="lm-price-period">always</span>
+      </div>
+      <div class="lm-divider"></div>
+      <ul class="lm-features">
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> The Network &mdash; general community space</li>
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> Connect with Black women in IT</li>
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> Upgrade to paid tier anytime</li>
+      </ul>
+      <a href="https://lumynr.com/join?plan=stardust" target="_top" class="lm-btn lm-btn-secondary">Join free</a>
+    </div>
+
+    <!-- Nova -->
+    <div class="lm-card">
+      <div class="lm-card-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+      </div>
+      <h3 class="lm-card-name">Nova</h3>
+      <p class="lm-card-desc">For students and early-career Black women in IT. Requires .edu email.</p>
+      <div class="lm-price">
+        <span class="lm-price-amount" id="lm-nova-price">$15</span>
+        <span class="lm-price-period">/month</span>
+        <p class="lm-price-note">Founding rate &mdash; locked permanently</p>
+      </div>
+      <div class="lm-divider"></div>
+      <ul class="lm-features">
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> Everything in Stardust</li>
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> Illuminate Book Club &mdash; monthly live sessions</li>
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> Be Transformidable &mdash; content + podcast archive</li>
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> Ask a Leader Forum</li>
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> Early Career &amp; Students Space</li>
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> Prept &mdash; AI interview prep, basic access</li>
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> Resource Library &mdash; foundational toolkit</li>
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> <span>Mentoring circles<span class="lm-soon">soon</span></span></li>
+      </ul>
+      <a href="https://lumynr.com/checkout?plan=nova&billing=monthly" target="_top" class="lm-btn lm-btn-primary" id="lm-nova-btn">Start free trial</a>
+    </div>
+
+    <!-- Luminary -->
+    <div class="lm-card featured">
+      <div class="lm-badge">Most popular</div>
+      <div class="lm-card-icon" style="margin-top:8px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+      </div>
+      <h3 class="lm-card-name">Luminary</h3>
+      <p class="lm-card-desc">For Black women in IT at any stage &mdash; launching, advancing, or leading.</p>
+      <div class="lm-price">
+        <span class="lm-price-amount" id="lm-luminary-price">$25</span>
+        <span class="lm-price-period">/month</span>
+        <p class="lm-price-note">Founding rate &mdash; locked permanently</p>
+      </div>
+      <div class="lm-divider"></div>
+      <ul class="lm-features">
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> Everything in Nova</li>
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> Full Lumynr Courses library</li>
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> Full Resource Library</li>
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> Member directory &mdash; full career visibility</li>
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> Prept &mdash; full access, no extra charge</li>
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> Founding rate locked permanently</li>
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> <span>Webinar replay library<span class="lm-soon">soon</span></span></li>
+        <li class="lm-feature"><span class="lm-check">&#10003;</span> <span>Small group coaching<span class="lm-soon">soon</span></span></li>
+      </ul>
+      <a href="https://lumynr.com/checkout?plan=luminary&billing=monthly" target="_top" class="lm-btn lm-btn-primary" id="lm-luminary-btn">Start free trial</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="lm-footer">
+    <p class="lm-note">All paid plans include a 30-day free trial &middot; Cancel anytime</p>
+    <p class="lm-fine">Founding Member rates locked permanently for paid subscribers who join by June 15, 2026</p>
+  </div>
+</div>
+
+<script>
+  // Hide founding banner after deadline
+  (function() {
+    if (new Date() >= new Date('2026-06-16T00:00:00')) {
+      var el = document.getElementById('lm-banner-wrap');
+      if (el) el.style.display = 'none';
+    }
+  })();
+
+  // Toggle
+  var lmAnnual = false;
+  document.getElementById('lm-toggle').addEventListener('click', function() {
+    lmAnnual = !lmAnnual;
+    var btn = this;
+    var lblM = document.getElementById('lm-lbl-monthly');
+    var lblA = document.getElementById('lm-lbl-annual');
+    var novaPrice = document.getElementById('lm-nova-price');
+    var luminaryPrice = document.getElementById('lm-luminary-price');
+    var novaBtn = document.getElementById('lm-nova-btn');
+    var luminaryBtn = document.getElementById('lm-luminary-btn');
+
+    if (lmAnnual) {
+      btn.className = 'lm-toggle on';
+      btn.setAttribute('aria-checked', 'true');
+      lblM.className = 'lm-toggle-label inactive';
+      lblA.className = 'lm-toggle-label active';
+      novaPrice.textContent = '$12';
+      luminaryPrice.textContent = '$20';
+      novaBtn.href = 'https://lumynr.com/checkout?plan=nova&billing=annual';
+      luminaryBtn.href = 'https://lumynr.com/checkout?plan=luminary&billing=annual';
+    } else {
+      btn.className = 'lm-toggle off';
+      btn.setAttribute('aria-checked', 'false');
+      lblM.className = 'lm-toggle-label active';
+      lblA.className = 'lm-toggle-label inactive';
+      novaPrice.textContent = '$15';
+      luminaryPrice.textContent = '$25';
+      novaBtn.href = 'https://lumynr.com/checkout?plan=nova&billing=monthly';
+      luminaryBtn.href = 'https://lumynr.com/checkout?plan=luminary&billing=monthly';
+    }
+  });
+</script>
+</body>
+</html>
