@@ -186,7 +186,7 @@ export default function MembershipPage() {
               </ul>
 
               <Link
-                href={`/join?plan=nova&billing=${isAnnual ? 'annual' : 'monthly'}`}
+                href={`/checkout?plan=nova&billing=${isAnnual ? 'annual' : 'monthly'}`}
                 className="btn-primary text-base py-4 w-full justify-center"
               >
                 Start free trial
@@ -256,7 +256,7 @@ export default function MembershipPage() {
               </ul>
 
               <Link
-                href={`/join?plan=luminary&billing=${isAnnual ? 'annual' : 'monthly'}`}
+                href={`/checkout?plan=luminary&billing=${isAnnual ? 'annual' : 'monthly'}`}
                 className="btn-primary text-base py-4 w-full justify-center"
               >
                 Start free trial
