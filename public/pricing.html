@@ -65,7 +65,9 @@
     }
     .lm-banner svg { width: 16px; height: 16px; flex-shrink: 0; }
 
-    /* ── Toggle ── */
+    /* ── CSS-Only Toggle ── */
+    #lm-annual-toggle { display: none; }
+
     .lm-toggle-wrap {
       display: flex;
       align-items: center;
@@ -76,29 +78,27 @@
     .lm-toggle-label {
       font-size: 14px;
       font-weight: 500;
-      transition: color 0.2s;
+      cursor: pointer;
+      user-select: none;
     }
-    .lm-toggle-label.active { color: #fff; }
-    .lm-toggle-label.inactive { color: #64748B; }
 
-    .lm-toggle {
+    /* Toggle track */
+    .lm-toggle-track {
       position: relative;
       width: 48px;
       height: 28px;
       border-radius: 9999px;
-      border: none;
+      background: #475569;
       cursor: pointer;
       transition: background-color 0.2s;
-      outline: none;
+      display: inline-block;
+      vertical-align: middle;
     }
-    .lm-toggle.off { background: #475569; }
-    .lm-toggle.on  { background: #F59E0B; }
-    .lm-toggle:focus-visible {
-      box-shadow: 0 0 0 2px #0F172A, 0 0 0 4px #F59E0B;
-    }
-    .lm-toggle-knob {
+    .lm-toggle-track::after {
+      content: '';
       position: absolute;
       top: 3px;
+      left: 3px;
       width: 22px;
       height: 22px;
       border-radius: 50%;
@@ -106,8 +106,42 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.2);
       transition: left 0.2s;
     }
-    .lm-toggle.off .lm-toggle-knob { left: 3px; }
-    .lm-toggle.on  .lm-toggle-knob { left: 23px; }
+
+    /* Monthly label styling (default: monthly active) */
+    .lm-lbl-monthly { color: #fff; }
+    .lm-lbl-annual { color: #64748B; }
+
+    /* Price / link visibility (default: show monthly) */
+    .lm-monthly { display: inline; }
+    .lm-annual { display: none; }
+    .lm-btn-monthly { display: flex; }
+    .lm-btn-annual { display: none; }
+
+    /* ── When annual is checked ── */
+    #lm-annual-toggle:checked ~ .lm-header .lm-toggle-track {
+      background: #F59E0B;
+    }
+    #lm-annual-toggle:checked ~ .lm-header .lm-toggle-track::after {
+      left: 23px;
+    }
+    #lm-annual-toggle:checked ~ .lm-header .lm-lbl-monthly {
+      color: #64748B;
+    }
+    #lm-annual-toggle:checked ~ .lm-header .lm-lbl-annual {
+      color: #fff;
+    }
+    #lm-annual-toggle:checked ~ .lm-cards .lm-monthly {
+      display: none;
+    }
+    #lm-annual-toggle:checked ~ .lm-cards .lm-annual {
+      display: inline;
+    }
+    #lm-annual-toggle:checked ~ .lm-cards .lm-btn-monthly {
+      display: none;
+    }
+    #lm-annual-toggle:checked ~ .lm-cards .lm-btn-annual {
+      display: flex;
+    }
 
     /* ── Cards Grid ── */
     .lm-cards {
@@ -117,7 +151,7 @@
       align-items: start;
       margin-top: 48px;
     }
-    @media (max-width: 480px) {
+    @media (max-width: 860px) {
       .lm-cards { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
       .lm-title { font-size: 30px; }
     }
@@ -196,7 +230,6 @@
 
     /* ── Buttons ── */
     .lm-btn {
-      display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
@@ -208,8 +241,10 @@
       cursor: pointer;
       border: none;
       transition: all 0.2s;
+      text-align: center;
     }
     .lm-btn-secondary {
+      display: flex;
       background: transparent;
       border: 1px solid #475569;
       color: #fff;
@@ -236,7 +271,10 @@
   </style>
 </head>
 <body>
-<div class="lm-pricing" id="lm-pricing">
+<div class="lm-pricing">
+  <!-- Hidden checkbox drives all toggle state via CSS -->
+  <input type="checkbox" id="lm-annual-toggle" />
+
   <!-- Header -->
   <div class="lm-header">
     <div class="lm-label">Membership</div>
@@ -244,7 +282,7 @@
     <p class="lm-subtitle">A private community built exclusively for Black women in technology.</p>
 
     <!-- Founding banner -->
-    <div class="lm-banner-wrap" id="lm-banner-wrap">
+    <div class="lm-banner-wrap">
       <div class="lm-banner">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         Founding Member rate locks on June 15, 2026 &mdash; paid plans only
@@ -253,11 +291,9 @@
 
     <!-- Toggle -->
     <div class="lm-toggle-wrap">
-      <span class="lm-toggle-label active" id="lm-lbl-monthly">Monthly</span>
-      <button class="lm-toggle off" id="lm-toggle" role="switch" aria-checked="false">
-        <span class="lm-toggle-knob"></span>
-      </button>
-      <span class="lm-toggle-label inactive" id="lm-lbl-annual">Annual</span>
+      <label for="lm-annual-toggle" class="lm-toggle-label lm-lbl-monthly">Monthly</label>
+      <label for="lm-annual-toggle" class="lm-toggle-track" role="switch" aria-label="Toggle annual billing"></label>
+      <label for="lm-annual-toggle" class="lm-toggle-label lm-lbl-annual">Annual</label>
     </div>
   </div>
 
@@ -280,7 +316,7 @@
         <li class="lm-feature"><span class="lm-check">&#10003;</span> Connect with Black women in IT</li>
         <li class="lm-feature"><span class="lm-check">&#10003;</span> Upgrade to paid tier anytime</li>
       </ul>
-      <a href="https://lumynr.com/join?plan=stardust" target="_top" class="lm-btn lm-btn-secondary">Join free</a>
+      <a href="https://lumynr.com/join?plan=stardust" target="_blank" rel="noopener" class="lm-btn lm-btn-secondary">Join free</a>
     </div>
 
     <!-- Nova -->
@@ -291,7 +327,7 @@
       <h3 class="lm-card-name">Nova</h3>
       <p class="lm-card-desc">For students and early-career Black women in IT. Requires .edu email.</p>
       <div class="lm-price">
-        <span class="lm-price-amount" id="lm-nova-price">$15</span>
+        <span class="lm-price-amount"><span class="lm-monthly">$15</span><span class="lm-annual">$12</span></span>
         <span class="lm-price-period">/month</span>
         <p class="lm-price-note">Founding rate &mdash; locked permanently</p>
       </div>
@@ -306,7 +342,8 @@
         <li class="lm-feature"><span class="lm-check">&#10003;</span> Resource Library &mdash; foundational toolkit</li>
         <li class="lm-feature"><span class="lm-check">&#10003;</span> <span>Mentoring circles<span class="lm-soon">soon</span></span></li>
       </ul>
-      <a href="https://lumynr.com/checkout?plan=nova&billing=monthly" target="_top" class="lm-btn lm-btn-primary" id="lm-nova-btn">Start free trial</a>
+      <a href="https://lumynr.com/checkout?plan=nova&billing=monthly" target="_blank" rel="noopener" class="lm-btn lm-btn-primary lm-btn-monthly">Start free trial</a>
+      <a href="https://lumynr.com/checkout?plan=nova&billing=annual" target="_blank" rel="noopener" class="lm-btn lm-btn-primary lm-btn-annual">Start free trial</a>
     </div>
 
     <!-- Luminary -->
@@ -318,7 +355,7 @@
       <h3 class="lm-card-name">Luminary</h3>
       <p class="lm-card-desc">For Black women in IT at any stage &mdash; launching, advancing, or leading.</p>
       <div class="lm-price">
-        <span class="lm-price-amount" id="lm-luminary-price">$25</span>
+        <span class="lm-price-amount"><span class="lm-monthly">$25</span><span class="lm-annual">$20</span></span>
         <span class="lm-price-period">/month</span>
         <p class="lm-price-note">Founding rate &mdash; locked permanently</p>
       </div>
@@ -333,7 +370,8 @@
         <li class="lm-feature"><span class="lm-check">&#10003;</span> <span>Webinar replay library<span class="lm-soon">soon</span></span></li>
         <li class="lm-feature"><span class="lm-check">&#10003;</span> <span>Small group coaching<span class="lm-soon">soon</span></span></li>
       </ul>
-      <a href="https://lumynr.com/checkout?plan=luminary&billing=monthly" target="_top" class="lm-btn lm-btn-primary" id="lm-luminary-btn">Start free trial</a>
+      <a href="https://lumynr.com/checkout?plan=luminary&billing=monthly" target="_blank" rel="noopener" class="lm-btn lm-btn-primary lm-btn-monthly">Start free trial</a>
+      <a href="https://lumynr.com/checkout?plan=luminary&billing=annual" target="_blank" rel="noopener" class="lm-btn lm-btn-primary lm-btn-annual">Start free trial</a>
     </div>
   </div>
 
@@ -343,56 +381,5 @@
     <p class="lm-fine">Founding Member rates locked permanently for paid subscribers who join by June 15, 2026</p>
   </div>
 </div>
-
-<script>
-  // Hide founding banner after deadline
-  (function() {
-    if (new Date() >= new Date('2026-06-16T00:00:00')) {
-      var el = document.getElementById('lm-banner-wrap');
-      if (el) el.style.display = 'none';
-    }
-  })();
-
-  // Toggle
-  var lmAnnual = false;
-  document.getElementById('lm-toggle').addEventListener('click', function() {
-    lmAnnual = !lmAnnual;
-    var btn = this;
-    var lblM = document.getElementById('lm-lbl-monthly');
-    var lblA = document.getElementById('lm-lbl-annual');
-    var novaPrice = document.getElementById('lm-nova-price');
-    var luminaryPrice = document.getElementById('lm-luminary-price');
-    var novaBtn = document.getElementById('lm-nova-btn');
-    var luminaryBtn = document.getElementById('lm-luminary-btn');
-
-    if (lmAnnual) {
-      btn.className = 'lm-toggle on';
-      btn.setAttribute('aria-checked', 'true');
-      lblM.className = 'lm-toggle-label inactive';
-      lblA.className = 'lm-toggle-label active';
-      novaPrice.textContent = '$12';
-      luminaryPrice.textContent = '$20';
-      novaBtn.href = 'https://lumynr.com/checkout?plan=nova&billing=annual';
-      luminaryBtn.href = 'https://lumynr.com/checkout?plan=luminary&billing=annual';
-    } else {
-      btn.className = 'lm-toggle off';
-      btn.setAttribute('aria-checked', 'false');
-      lblM.className = 'lm-toggle-label active';
-      lblA.className = 'lm-toggle-label inactive';
-      novaPrice.textContent = '$15';
-      luminaryPrice.textContent = '$25';
-      novaBtn.href = 'https://lumynr.com/checkout?plan=nova&billing=monthly';
-      luminaryBtn.href = 'https://lumynr.com/checkout?plan=luminary&billing=monthly';
-    }
-  });
-
-  // Auto-resize: tell parent iframe to match content height
-  function lmPostHeight() {
-    var h = document.body.scrollHeight;
-    window.parent.postMessage({ lumynrHeight: h }, '*');
-  }
-  lmPostHeight();
-  window.addEventListener('resize', lmPostHeight);
-</script>
 </body>
 </html>
