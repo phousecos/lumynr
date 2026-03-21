@@ -1,0 +1,30 @@
+<!--
+  Lumynr Pricing — Circle Embed
+
+  HOW TO USE:
+  1. Deploy the site so pricing.html is served at https://lumynr.com/pricing.html
+
+  2. Paste this entire snippet into a Circle "Custom HTML" block.
+
+  The iframe loads the full pricing page with working toggle + buttons.
+  Links open in the parent window (not inside the iframe).
+  The iframe auto-resizes to fit the content — no scrollbars.
+-->
+<iframe
+  id="lm-pricing-frame"
+  src="https://lumynr.com/pricing.html"
+  style="width:100%;border:none;overflow:hidden;display:block;min-height:1100px;"
+  scrolling="no"
+  title="Lumynr Pricing"
+  loading="lazy"
+></iframe>
+
+<script>
+  // Auto-resize iframe to match content height
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.lumynrHeight) {
+      var frame = document.getElementById('lm-pricing-frame');
+      if (frame) frame.style.height = e.data.lumynrHeight + 'px';
+    }
+  });
+</script>
