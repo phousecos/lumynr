@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Sparkles, Clock } from 'lucide-react'
+import { Sparkles, Clock, ArrowRight, Users, Award } from 'lucide-react'
 
 // Founding member deadline — hide the banner after this date
 const FOUNDING_DEADLINE = '2026-06-15'
@@ -272,6 +272,87 @@ export default function MembershipPage() {
             <p className="text-gray-500 text-xs">
               Founding Member rates locked permanently for paid subscribers who join by June 15, 2026
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Constellation Hero Section ── */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-amber-500 via-amber-400 to-yellow-500 py-20 md:py-28">
+        {/* Decorative background pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-white/20 blur-3xl" />
+          <div className="absolute bottom-10 right-10 w-80 h-80 rounded-full bg-amber-900/20 blur-3xl" />
+        </div>
+
+        <div className="container-custom relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-navy-900/15 text-navy-900 text-sm font-semibold mb-8">
+              <Users className="w-4 h-4" />
+              Small-Group Coaching &mdash; Cohorts of 4
+            </div>
+
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 mb-6 leading-tight">
+              You&rsquo;ve Got Goals.<br />
+              Let&rsquo;s Build Accountability<br className="hidden md:block" /> Around Them.
+            </h2>
+
+            <p className="text-lg md:text-xl text-navy-900/80 max-w-2xl mx-auto mb-4 leading-relaxed">
+              Constellation is a 3-month group coaching program for women in IT who are ready to move from intention to action &mdash; with structure, support, and real accountability.
+            </p>
+
+            <p className="text-navy-900/60 text-sm font-medium mb-10">
+              Starting at $250/month &middot; First cohorts open June 1, 2026 &middot; Limited to 4 members per cohort
+            </p>
+
+            <a
+              href="https://community.lumynr.com/untitled-page"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-navy-900 text-amber-400 font-semibold px-8 py-4 rounded-xl text-lg shadow-lg shadow-navy-900/30 hover:-translate-y-0.5 hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-navy-900 focus:ring-offset-2 focus:ring-offset-amber-400"
+            >
+              Learn More
+              <ArrowRight className="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Polaris Hero Section ── */}
+      <section className="relative overflow-hidden bg-[#4A0E2A] py-20 md:py-28">
+        {/* Decorative background pattern */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-10 right-20 w-72 h-72 rounded-full bg-[#C9A96E]/20 blur-3xl" />
+          <div className="absolute bottom-10 left-10 w-96 h-96 rounded-full bg-[#4A0E2A]/40 blur-3xl" />
+        </div>
+
+        <div className="container-custom relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9A96E]/15 text-[#C9A96E] text-sm font-semibold mb-8">
+              <Award className="w-4 h-4" />
+              Executive Leadership Coaching + Certification
+            </div>
+
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#C9A96E] mb-6 leading-tight">
+              This Is Where Transformation<br className="hidden md:block" /> Becomes a Credential.
+            </h2>
+
+            <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-4 leading-relaxed">
+              Polaris is a 3-month intensive executive coaching program built around the Transformidable leadership methodology &mdash; weekly 1:1 coaching, a certification, and 12 months of AgentPMO access.
+            </p>
+
+            <p className="text-[#C9A96E]/60 text-sm font-medium mb-10">
+              Starting at $1,800/month &middot; First cohort opens July 1, 2026 &middot; Employer reimbursement available
+            </p>
+
+            <a
+              href="https://community.lumynr.com/untitled-page-dfc425"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#C9A96E] text-[#4A0E2A] font-semibold px-8 py-4 rounded-xl text-lg shadow-lg shadow-[#C9A96E]/30 hover:-translate-y-0.5 hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#C9A96E] focus:ring-offset-2 focus:ring-offset-[#4A0E2A]"
+            >
+              Learn More
+              <ArrowRight className="w-5 h-5" />
+            </a>
           </div>
         </div>
       </section>
