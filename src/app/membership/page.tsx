@@ -1,19 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
-import { Sparkles, Clock, ArrowRight, Users, Award } from 'lucide-react'
+import { Clock, ArrowRight, Users, Award } from 'lucide-react'
 
 // Founding member deadline — hide the banner after this date
 const FOUNDING_DEADLINE = '2026-06-15'
-
-function SoonBadge() {
-  return (
-    <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30">
-      soon
-    </span>
-  )
-}
 
 function CheckIcon() {
   return <span className="text-primary mt-0.5 shrink-0">&#10003;</span>
@@ -86,24 +77,21 @@ export default function MembershipPage() {
         <div className="container-custom">
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-start">
 
-            {/* ── Stardust Card ── */}
+            {/* ── Spark Card (Free) ── */}
             <div className="bg-navy-900 rounded-3xl p-8 border border-navy-700 flex flex-col h-full">
-              <div className="flex items-center gap-2 mb-3">
-                <Sparkles className="w-5 h-5 text-primary-400" />
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-2">Stardust</h3>
-              <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                Explore the community. No commitment, no card needed.
-              </p>
+              <h3 className="text-2xl font-bold text-white mb-2">Spark</h3>
 
               <div className="mb-6">
                 <div className="flex items-baseline gap-2">
                   <span className="text-4xl font-bold text-white">Free</span>
-                  <span className="text-gray-400 text-lg">always</span>
                 </div>
               </div>
 
-              <div className="h-px bg-navy-700 mb-6" />
+              <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                Explore the community. No commitment, no card needed.
+              </p>
+
+              <p className="text-gray-400 text-sm font-medium mb-4">Includes:</p>
 
               <ul className="space-y-4 mb-8 flex-1">
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
@@ -116,44 +104,48 @@ export default function MembershipPage() {
                 </li>
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
                   <CheckIcon />
+                  Be Transformidable &mdash; content + podcast archive
+                </li>
+                <li className="flex items-start gap-3 text-gray-300 text-sm">
+                  <CheckIcon />
                   Upgrade to paid tier anytime
                 </li>
               </ul>
 
-              <Link
-                href="/join?plan=stardust"
+              <a
+                href="https://community.lumynr.com/checkout/nova-membership-tier-founder"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-secondary text-base py-4 w-full justify-center"
               >
-                Join free
-              </Link>
+                Join Now
+              </a>
             </div>
 
             {/* ── Nova Card ── */}
             <div className="bg-navy-900 rounded-3xl p-8 border border-navy-700 flex flex-col h-full">
-              <div className="flex items-center gap-2 mb-3">
-                <Sparkles className="w-5 h-5 text-primary-400" />
-              </div>
               <h3 className="text-2xl font-bold text-white mb-2">Nova</h3>
-              <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                For students and early-career Black women in IT. Requires .edu email.
-              </p>
 
               <div className="mb-6">
                 <div className="flex items-baseline gap-2">
                   <span className="text-4xl font-bold text-white">${novaPrice}</span>
                   <span className="text-gray-400 text-lg">/month</span>
                 </div>
-                <p className="text-primary-400 font-medium mt-1 text-sm">
-                  Founding rate &mdash; locked permanently
+                <p className="text-gray-400 text-sm mt-2">
+                  17% Discount for Annual Payment ($149)
                 </p>
               </div>
 
-              <div className="h-px bg-navy-700 mb-6" />
+              <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                For students and early-career Black women in IT. Requires .edu email.
+              </p>
+
+              <p className="text-gray-400 text-sm font-medium mb-4">Includes:</p>
 
               <ul className="space-y-4 mb-8 flex-1">
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
                   <CheckIcon />
-                  Everything in Stardust
+                  Everything in Spark
                 </li>
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
                   <CheckIcon />
@@ -161,15 +153,11 @@ export default function MembershipPage() {
                 </li>
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
                   <CheckIcon />
-                  Be Transformidable &mdash; content + podcast archive
-                </li>
-                <li className="flex items-start gap-3 text-gray-300 text-sm">
-                  <CheckIcon />
                   Ask a Leader Forum
                 </li>
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
                   <CheckIcon />
-                  Early Career &amp; Students Space
+                  Students Community Space
                 </li>
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
                   <CheckIcon />
@@ -181,44 +169,44 @@ export default function MembershipPage() {
                 </li>
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
                   <CheckIcon />
-                  <span>Mentoring circles<SoonBadge /></span>
+                  Mentoring circles
                 </li>
               </ul>
 
-              <Link
-                href={`/checkout?plan=nova&billing=${isAnnual ? 'annual' : 'monthly'}`}
+              <a
+                href="https://community.lumynr.com/checkout/nova-membership-tier-founder"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-primary text-base py-4 w-full justify-center"
               >
-                Start free trial
-              </Link>
+                Join Now
+              </a>
             </div>
 
             {/* ── Luminary Card (Most Popular) ── */}
             <div className="bg-navy-900 rounded-3xl p-8 border border-primary-500/40 flex flex-col h-full relative">
               {/* Most popular badge */}
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary-500 text-navy-900 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg shadow-primary-500/30">
-                Most popular
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary-500 text-navy-900 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg shadow-primary-500/30 uppercase tracking-wide">
+                Most Popular
               </div>
 
-              <div className="flex items-center gap-2 mb-3 mt-2">
-                <Sparkles className="w-5 h-5 text-primary-400" />
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-2">Luminary</h3>
-              <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                For Black women in IT at any stage &mdash; launching, advancing, or leading.
-              </p>
+              <h3 className="text-2xl font-bold text-white mb-2 mt-2">Luminary</h3>
 
               <div className="mb-6">
                 <div className="flex items-baseline gap-2">
                   <span className="text-4xl font-bold text-white">${luminaryPrice}</span>
                   <span className="text-gray-400 text-lg">/month</span>
                 </div>
-                <p className="text-primary-400 font-medium mt-1 text-sm">
-                  Founding rate &mdash; locked permanently
+                <p className="text-gray-400 text-sm mt-2">
+                  17% Discount for Annual Payment ($249)
                 </p>
               </div>
 
-              <div className="h-px bg-navy-700 mb-6" />
+              <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                For Black women in IT at any stage &mdash; launching, advancing, or leading.
+              </p>
+
+              <p className="text-gray-400 text-sm font-medium mb-4">Includes:</p>
 
               <ul className="space-y-4 mb-8 flex-1">
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
@@ -227,7 +215,7 @@ export default function MembershipPage() {
                 </li>
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
                   <CheckIcon />
-                  Full Lumynr Courses library
+                  Full Lumynr Academy Courses library
                 </li>
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
                   <CheckIcon />
@@ -239,6 +227,10 @@ export default function MembershipPage() {
                 </li>
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
                   <CheckIcon />
+                  Custom Resource Creation
+                </li>
+                <li className="flex items-start gap-3 text-gray-300 text-sm">
+                  <CheckIcon />
                   Prept &mdash; full access, no extra charge
                 </li>
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
@@ -247,20 +239,18 @@ export default function MembershipPage() {
                 </li>
                 <li className="flex items-start gap-3 text-gray-300 text-sm">
                   <CheckIcon />
-                  <span>Webinar replay library<SoonBadge /></span>
-                </li>
-                <li className="flex items-start gap-3 text-gray-300 text-sm">
-                  <CheckIcon />
-                  <span>Small group coaching<SoonBadge /></span>
+                  Webinar replay library
                 </li>
               </ul>
 
-              <Link
-                href={`/checkout?plan=luminary&billing=${isAnnual ? 'annual' : 'monthly'}`}
+              <a
+                href="https://community.lumynr.com/checkout/luminary-membership-tier-founder"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-primary text-base py-4 w-full justify-center"
               >
-                Start free trial
-              </Link>
+                Apply Now
+              </a>
             </div>
           </div>
 
