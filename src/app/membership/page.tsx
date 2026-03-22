@@ -113,7 +113,7 @@ export default function MembershipPage() {
               </ul>
 
               <a
-                href="https://community.lumynr.com/checkout/nova-membership-tier-founder"
+                href="https://community.lumynr.com/join?invitation_token=a00999077ea94592e5a69473164856058946c93f-7d2229cd-30ed-403b-a1fa-4fcdefc49a7e"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary text-base py-4 w-full justify-center"
