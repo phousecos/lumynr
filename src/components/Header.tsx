@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 
-const MEMBER_LOGIN_URL = process.env.NEXT_PUBLIC_MEMBER_PLATFORM_LOGIN_URL || '#'
+const MEMBER_LOGIN_URL = 'https://community.lumynr.com'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -22,7 +22,6 @@ export default function Header() {
   const navigation = [
     { name: 'About', href: '/about' },
     { name: 'Membership', href: '/membership' },
-    { name: 'Pricing', href: '/pricing.html' },
   ]
 
   return (
