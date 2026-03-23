@@ -15,8 +15,8 @@ export default function MembershipPage() {
 
   const showFoundingBanner = new Date().toISOString().slice(0, 10) <= FOUNDING_DEADLINE
 
-  const novaPrice = isAnnual ? 12 : 15
-  const luminaryPrice = isAnnual ? 20 : 25
+  const novaPrice = isAnnual ? 17 : 20
+  const luminaryPrice = isAnnual ? 25 : 30
 
   return (
     <div className="bg-navy-900 min-h-screen pt-20">
@@ -40,7 +40,7 @@ export default function MembershipPage() {
             <div className="flex justify-center mt-10">
               <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary-500/40 bg-primary-500/10 text-primary-400 font-medium text-sm">
                 <Clock className="w-4 h-4" />
-                Founding Member rate locks on June 15, 2026 &mdash; paid plans only
+                First fifty members receive a discounted rate for the first year
               </div>
             </div>
           )}
@@ -132,7 +132,7 @@ export default function MembershipPage() {
                   <span className="text-gray-400 text-lg">/month</span>
                 </div>
                 <p className="text-gray-400 text-sm mt-2">
-                  17% Discount for Annual Payment ($149)
+                  17% Discount for Annual Payment ($199)
                 </p>
               </div>
 
@@ -198,7 +198,7 @@ export default function MembershipPage() {
                   <span className="text-gray-400 text-lg">/month</span>
                 </div>
                 <p className="text-gray-400 text-sm mt-2">
-                  17% Discount for Annual Payment ($249)
+                  17% Discount for Annual Payment ($299)
                 </p>
               </div>
 
@@ -249,7 +249,7 @@ export default function MembershipPage() {
                 rel="noopener noreferrer"
                 className="btn-primary text-base py-4 w-full justify-center"
               >
-                Apply Now
+                Join Now
               </a>
             </div>
           </div>
@@ -260,7 +260,7 @@ export default function MembershipPage() {
               All paid plans include a 30-day free trial &middot; Cancel anytime
             </p>
             <p className="text-gray-500 text-xs">
-              Founding Member rates locked permanently for paid subscribers who join by June 15, 2026
+              First fifty members receive a discounted rate for the first year
             </p>
           </div>
         </div>
