@@ -25,8 +25,8 @@ const PLAN_DETAILS: Record<
 > = {
   nova: {
     name: 'Nova',
-    monthlyPrice: 15,
-    annualPrice: 12,
+    monthlyPrice: 20,
+    annualPrice: 17,
     icon: Sparkles,
     features: [
       'Everything in Stardust',
@@ -39,8 +39,8 @@ const PLAN_DETAILS: Record<
   },
   luminary: {
     name: 'Luminary',
-    monthlyPrice: 25,
-    annualPrice: 20,
+    monthlyPrice: 30,
+    annualPrice: 25,
     icon: Star,
     features: [
       'Everything in Nova',
