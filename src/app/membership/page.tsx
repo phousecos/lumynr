@@ -291,7 +291,7 @@ export default function MembershipPage() {
             </p>
 
             <p className="text-navy-900/60 text-sm font-medium mb-10">
-              Starting at $250/month &middot; First cohorts open June 1, 2026 &middot; Limited to 4 members per cohort
+              Starting at $250/month &middot; First cohorts open April 15, 2026 &middot; Limited to 4 members per cohort
             </p>
 
             <a
