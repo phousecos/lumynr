@@ -179,7 +179,7 @@ export default function MembershipPage() {
                 rel="noopener noreferrer"
                 className="btn-primary text-base py-4 w-full justify-center"
               >
-                Join Now
+                Start Trial
               </a>
             </div>
 
@@ -249,7 +249,7 @@ export default function MembershipPage() {
                 rel="noopener noreferrer"
                 className="btn-primary text-base py-4 w-full justify-center"
               >
-                Join Now
+                Start Trial
               </a>
             </div>
           </div>
