@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Script from 'next/script'
 import { Clock, ArrowRight, Users, Award } from 'lucide-react'
 
 // Founding member deadline — hide the banner after this date
@@ -20,6 +21,22 @@ export default function MembershipPage() {
 
   return (
     <div className="bg-navy-900 min-h-screen pt-20">
+      {/* PartneroJS */}
+      <Script
+        id="partnero-tracking"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function(p,t,n,e,r,o){ p['__partnerObject']=r;function f(){
+            var c={ a:arguments,q:[]};var r=this.push(c);return "number"!=typeof r?r:f.bind(c.q);}
+            f.q=f.q||[];p[r]=p[r]||f.bind(f.q);p[r].q=p[r].q||f.q;o=t.createElement(n);
+            var _=t.getElementsByTagName(n)[0];o.async=1;o.src=e+'?v'+(~~(new Date().getTime()/1e6));
+            _.parentNode.insertBefore(o,_);})(window, document, 'script', 'https://app.partnero.com/js/universal.js', 'po');
+            po('settings', 'assets_host', 'https://assets.partnero.com');
+            po('program', 'U0DUFWSG', 'load');
+          `,
+        }}
+      />
       {/* Header Section */}
       <section className="py-16 md:py-24">
         <div className="container-custom">
