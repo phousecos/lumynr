@@ -16,6 +16,8 @@ function BlueskyIcon({ className }: { className?: string }) {
   )
 }
 
+const AMBASSADOR_PROGRAM_URL = process.env.NEXT_PUBLIC_AMBASSADOR_PROGRAM_URL
+
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
@@ -23,6 +25,9 @@ export default function Footer() {
     { name: 'About', href: '/about' },
     { name: 'Membership', href: '/membership' },
     { name: 'Apply', href: '/apply' },
+    ...(AMBASSADOR_PROGRAM_URL
+      ? [{ name: 'Ambassador Program', href: AMBASSADOR_PROGRAM_URL, external: true }]
+      : []),
     { name: 'Terms of Service', href: '/terms' },
     { name: 'Privacy Policy', href: '/privacy' },
   ]
@@ -80,12 +85,23 @@ export default function Footer() {
             <ul className="space-y-3">
               {footerLinks.map((link) => (
                 <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
-                  >
-                    {link.name}
-                  </Link>
+                  {'external' in link ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-white transition-colors text-sm"
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className="text-gray-400 hover:text-white transition-colors text-sm"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

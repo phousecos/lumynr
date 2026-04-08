@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 
 const MEMBER_LOGIN_URL = 'https://community.lumynr.com'
+const AMBASSADOR_PROGRAM_URL = process.env.NEXT_PUBLIC_AMBASSADOR_PROGRAM_URL
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -22,6 +23,9 @@ export default function Header() {
   const navigation = [
     { name: 'About', href: '/about' },
     { name: 'Membership', href: '/membership' },
+    ...(AMBASSADOR_PROGRAM_URL
+      ? [{ name: 'Ambassador Program', href: AMBASSADOR_PROGRAM_URL, external: true }]
+      : []),
   ]
 
   return (
@@ -48,16 +52,29 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="relative px-5 py-2.5 text-gray-300 hover:text-white transition-colors font-medium group"
-              >
-                {item.name}
-                <span className="absolute inset-x-2 -bottom-px h-px bg-gradient-to-r from-primary-500/0 via-primary-500 to-primary-500/0 opacity-0 group-hover:opacity-100 transition-opacity" />
-              </Link>
-            ))}
+            {navigation.map((item) =>
+              'external' in item ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative px-5 py-2.5 text-gray-300 hover:text-white transition-colors font-medium group"
+                >
+                  {item.name}
+                  <span className="absolute inset-x-2 -bottom-px h-px bg-gradient-to-r from-primary-500/0 via-primary-500 to-primary-500/0 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="relative px-5 py-2.5 text-gray-300 hover:text-white transition-colors font-medium group"
+                >
+                  {item.name}
+                  <span className="absolute inset-x-2 -bottom-px h-px bg-gradient-to-r from-primary-500/0 via-primary-500 to-primary-500/0 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
+              )
+            )}
             <div className="w-px h-6 bg-navy-700 mx-4" />
             <a
               href={MEMBER_LOGIN_URL}
@@ -91,16 +108,29 @@ export default function Header() {
           }`}
         >
           <div className="py-4 border-t border-navy-800/50 space-y-1">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-navy-800/50 rounded-lg transition-colors font-medium"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navigation.map((item) =>
+              'external' in item ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-navy-800/50 rounded-lg transition-colors font-medium"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-navy-800/50 rounded-lg transition-colors font-medium"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              )
+            )}
             <div className="pt-3 px-4">
               <a
                 href={MEMBER_LOGIN_URL}
