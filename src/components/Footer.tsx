@@ -130,7 +130,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-navy-800/50">
-          <p className="text-gray-500 text-sm text-center">
+          <p className="text-gray-400 text-sm text-center">
             © {currentYear} Lumynr. All rights reserved.
           </p>
         </div>

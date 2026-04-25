@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://lumynr.com/sitemap.xml
+Disallow: /privacy
+Disallow: /terms
+Disallow: /referral-terms

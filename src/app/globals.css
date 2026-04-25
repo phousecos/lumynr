@@ -179,3 +179,22 @@
     }
   }
 }
+
+/* Honor user motion preferences (WCAG 2.3.3 / vestibular safety).
+   Disables animations, transitions, smooth scrolling, and the
+   decorative flame motion for users who request reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-flame-drift,
+  .animate-flame-glow {
+    animation: none !important;
+  }
+}

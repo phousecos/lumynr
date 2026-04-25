@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'Referral Program Terms | Lumynr',
   description:
     'Terms and conditions for the Lumynr referral program. Earn free months by inviting friends.',
+  robots: { index: false, follow: true },
 }
 
 export default function ReferralTermsPage() {
@@ -251,7 +252,7 @@ export default function ReferralTermsPage() {
                 </ul>
                 <p className="leading-relaxed">
                   For complete information about how we handle personal data, please review our{' '}
-                  <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>.
+                  <Link href="/privacy" className="text-primary-700 hover:underline">Privacy Policy</Link>.
                 </p>
               </section>
 
@@ -261,7 +262,7 @@ export default function ReferralTermsPage() {
                 <h3 className="text-lg font-semibold text-navy-900 mb-2">10.1 Resolution</h3>
                 <p className="mb-6 leading-relaxed">
                   If you have a dispute regarding referral tracking, qualification, or rewards, please contact
-                  us at <a href="mailto:members@lumynr.com" className="text-primary hover:underline">members@lumynr.com</a>.
+                  us at <a href="mailto:members@lumynr.com" className="text-primary-700 hover:underline">members@lumynr.com</a>.
                   We will review the matter and respond within 10 business days.
                 </p>
 
@@ -287,8 +288,8 @@ export default function ReferralTermsPage() {
                 <h3 className="text-lg font-semibold text-navy-900 mb-2">12.1 Entire Agreement</h3>
                 <p className="mb-6 leading-relaxed">
                   These Terms and Conditions, together with the Lumynr{' '}
-                  <Link href="/terms" className="text-primary hover:underline">Terms of Service</Link> and{' '}
-                  <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>,
+                  <Link href="/terms" className="text-primary-700 hover:underline">Terms of Service</Link> and{' '}
+                  <Link href="/privacy" className="text-primary-700 hover:underline">Privacy Policy</Link>,
                   constitute the entire agreement between you and Lumynr regarding the Program.
                 </p>
 
@@ -316,7 +317,7 @@ export default function ReferralTermsPage() {
                 <p className="mb-2 leading-relaxed">For questions about the Referral Program, please contact:</p>
                 <p className="leading-relaxed">
                   <strong>Email:</strong>{' '}
-                  <a href="mailto:members@lumynr.com" className="text-primary hover:underline">members@lumynr.com</a>
+                  <a href="mailto:members@lumynr.com" className="text-primary-700 hover:underline">members@lumynr.com</a>
                 </p>
               </section>
 

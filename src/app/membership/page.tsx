@@ -64,25 +64,30 @@ export default function MembershipPage() {
 
           {/* Monthly / Annual Toggle */}
           <div className="flex items-center justify-center gap-4 mt-10">
-            <span className={`text-sm font-medium ${!isAnnual ? 'text-white' : 'text-gray-500'}`}>
+            <span className={`text-sm font-medium ${!isAnnual ? 'text-white' : 'text-gray-400'}`}>
               Monthly
             </span>
             <button
               type="button"
               role="switch"
               aria-checked={isAnnual}
+              aria-label="Toggle billing period: Monthly or Annual"
               onClick={() => setIsAnnual(!isAnnual)}
               className={`relative inline-flex h-7 w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-navy-900 ${
                 isAnnual ? 'bg-primary-500' : 'bg-navy-600'
               }`}
             >
+              <span className="sr-only">
+                {isAnnual ? 'Annual billing selected' : 'Monthly billing selected'}
+              </span>
               <span
+                aria-hidden="true"
                 className={`pointer-events-none inline-block h-[22px] w-[22px] transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
                   isAnnual ? 'translate-x-5' : 'translate-x-0.5'
                 }`}
               />
             </button>
-            <span className={`text-sm font-medium ${isAnnual ? 'text-white' : 'text-gray-500'}`}>
+            <span className={`text-sm font-medium ${isAnnual ? 'text-white' : 'text-gray-400'}`}>
               Annual
             </span>
           </div>
@@ -276,7 +281,7 @@ export default function MembershipPage() {
             <p className="text-gray-400 text-sm">
               All paid plans include a 30-day free trial &middot; Cancel anytime
             </p>
-            <p className="text-gray-500 text-xs">
+            <p className="text-gray-400 text-xs">
               First fifty members receive a discounted rate for the first year
             </p>
           </div>

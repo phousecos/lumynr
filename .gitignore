@@ -33,3 +33,10 @@ yarn-error.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# Documents (drafts/policies belong in shared docs, not the repo)
+# Public PDFs in /public are still tracked via the negation rule below.
+*.docx
+*.doc
+*.pdf
+!public/**/*.pdf

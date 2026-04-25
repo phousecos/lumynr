@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Privacy Policy | Lumynr',
   description: 'Lumynr Privacy Policy - How we collect, use, and protect your information',
+  robots: { index: false, follow: true },
 }
 
 export default function PrivacyPage() {
@@ -127,7 +128,7 @@ export default function PrivacyPage() {
               To exercise these rights, contact us at{' '}
               <a
                 href="mailto:members@lumynr.com"
-                className="text-primary hover:underline"
+                className="text-primary-700 hover:underline"
               >
                 members@lumynr.com
               </a>
@@ -202,7 +203,7 @@ export default function PrivacyPage() {
               Email:{' '}
               <a
                 href="mailto:members@lumynr.com"
-                className="text-primary hover:underline"
+                className="text-primary-700 hover:underline"
               >
                 members@lumynr.com
               </a>

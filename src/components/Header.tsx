@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
@@ -11,6 +11,7 @@ const AMBASSADOR_PROGRAM_URL = process.env.NEXT_PUBLIC_AMBASSADOR_PROGRAM_URL
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const toggleRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +20,18 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileMenuOpen(false)
+        toggleRef.current?.focus()
+      }
+    }
+    document.addEventListener('keydown', handleKey)
+    return () => document.removeEventListener('keydown', handleKey)
+  }, [mobileMenuOpen])
 
   const navigation = [
     { name: 'About', href: '/about' },
@@ -88,11 +101,14 @@ export default function Header() {
 
           {/* Mobile menu button */}
           <button
+            ref={toggleRef}
             type="button"
-            className="md:hidden p-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-navy-800/50 transition-colors"
+            className="md:hidden p-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-navy-800/50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-navy-900"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav"
+            aria-label={mobileMenuOpen ? 'Close main menu' : 'Open main menu'}
           >
-            <span className="sr-only">Open main menu</span>
             {mobileMenuOpen ? (
               <X className="h-6 w-6" aria-hidden="true" />
             ) : (
@@ -103,8 +119,10 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         <div
+          id="mobile-nav"
+          aria-hidden={!mobileMenuOpen}
           className={`md:hidden overflow-hidden transition-all duration-300 ease-out ${
-            mobileMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+            mobileMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
           }`}
         >
           <div className="py-4 border-t border-navy-800/50 space-y-1">
@@ -115,6 +133,7 @@ export default function Header() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  tabIndex={mobileMenuOpen ? 0 : -1}
                   className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-navy-800/50 rounded-lg transition-colors font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -124,6 +143,7 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
+                  tabIndex={mobileMenuOpen ? 0 : -1}
                   className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-navy-800/50 rounded-lg transition-colors font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -134,6 +154,7 @@ export default function Header() {
             <div className="pt-3 px-4">
               <a
                 href={MEMBER_LOGIN_URL}
+                tabIndex={mobileMenuOpen ? 0 : -1}
                 className="btn-primary w-full text-sm justify-center"
                 target="_blank"
                 rel="noopener noreferrer"

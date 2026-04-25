@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Terms and Conditions | Lumynr',
   description: 'Lumynr Terms and Conditions of Membership',
+  robots: { index: false, follow: true },
 }
 
 export default function TermsPage() {
@@ -10,7 +11,7 @@ export default function TermsPage() {
     <div className="bg-white min-h-screen pt-20">
       <div className="container-custom py-16 md:py-24">
         <div className="max-w-3xl mx-auto prose prose-lg prose-navy">
-          <p className="text-sm font-semibold text-primary-500 uppercase tracking-widest mb-2">
+          <p className="text-sm font-semibold text-primary-700 uppercase tracking-widest mb-2">
             LUMYNR
           </p>
           <p className="text-gray-500 italic mb-2">
