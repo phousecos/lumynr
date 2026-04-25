@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'Referral Program Terms | Lumynr',
   description:
     'Terms and conditions for the Lumynr referral program. Earn free months by inviting friends.',
+  robots: { index: false, follow: true },
 }
 
 export default function ReferralTermsPage() {

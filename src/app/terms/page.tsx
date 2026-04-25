@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Terms and Conditions | Lumynr',
   description: 'Lumynr Terms and Conditions of Membership',
+  robots: { index: false, follow: true },
 }
 
 export default function TermsPage() {
