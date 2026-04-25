@@ -128,7 +128,7 @@ export default function PrivacyPage() {
               To exercise these rights, contact us at{' '}
               <a
                 href="mailto:members@lumynr.com"
-                className="text-primary hover:underline"
+                className="text-primary-700 hover:underline"
               >
                 members@lumynr.com
               </a>
@@ -203,7 +203,7 @@ export default function PrivacyPage() {
               Email:{' '}
               <a
                 href="mailto:members@lumynr.com"
-                className="text-primary hover:underline"
+                className="text-primary-700 hover:underline"
               >
                 members@lumynr.com
               </a>
