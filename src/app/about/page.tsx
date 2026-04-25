@@ -129,12 +129,9 @@ export default function AboutPage() {
               of it from the beginning.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/request-invitation" className="btn-primary text-lg">
-                Request Your Invitation
+              <Link href="/membership" className="btn-primary text-lg">
+                View Membership Options
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-              <Link href="/membership" className="btn-outline-light text-lg">
-                Already have an invitation? Join now
               </Link>
             </div>
           </div>

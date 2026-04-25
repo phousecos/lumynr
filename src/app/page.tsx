@@ -133,10 +133,10 @@ export default function Home() {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
               <Link
-                href="/apply"
+                href="/membership"
                 className="btn-outline-light text-base md:text-lg backdrop-blur-sm"
               >
-                Apply Now
+                Join the Community
               </Link>
             </div>
           </div>
@@ -364,8 +364,8 @@ export default function Home() {
                 View Membership Options
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
-              <Link href="/apply" className="btn-outline-light text-base backdrop-blur-sm">
-                Apply Now
+              <Link href="/membership" className="btn-outline-light text-base backdrop-blur-sm">
+                Join the Community
               </Link>
             </div>
           </div>
