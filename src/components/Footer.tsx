@@ -24,7 +24,6 @@ export default function Footer() {
   const footerLinks = [
     { name: 'About', href: '/about' },
     { name: 'Membership', href: '/membership' },
-    { name: 'Apply', href: '/apply' },
     ...(AMBASSADOR_PROGRAM_URL
       ? [{ name: 'Ambassador Program', href: AMBASSADOR_PROGRAM_URL, external: true }]
       : []),
